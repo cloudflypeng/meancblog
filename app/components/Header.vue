@@ -5,6 +5,12 @@ const menu = [
     name: 'Home',
     path: '/'
   }, {
+    name: 'Blog',
+    path: '/blog'
+  }, {
+    name: 'Friends',
+    path: '/friends'
+  }, {
     name: 'experience',
     path: '#experience'
   }, {

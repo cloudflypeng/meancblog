@@ -1,9 +1,9 @@
 <script setup lang="ts" vapor>
 import { ref } from 'vue'
-import friendsData from '../data/friends.json'
 import PsLogo from './fever/PsLogo.vue'
 import PsStripes from './fever/PsStripes.vue'
 import PsDiagonal from './fever/PsDiagonal.vue'
+import { useRuntimeConfig } from '#app'
 
 interface Friend {
   name: string
@@ -19,8 +19,10 @@ const generatePattern = () => {
   return Array.from({ length: 5 }, () => chars[Math.floor(Math.random() * chars.length)]).join('')
 }
 
+const { friendsData } = useRuntimeConfig().public
+
 // Initialize with random rotation
-const friends = ref<Friend[]>(friendsData.map(f => ({
+const friends = ref<Friend[]>(friendsData.map((f: any) => ({
   ...f,
   rotate: Math.random() * 6 - 3, // Random rotation between -3deg and 3deg
   pattern: generatePattern()

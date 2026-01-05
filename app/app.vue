@@ -1,29 +1,20 @@
 <template>
   <div>
     <!-- 导航栏 -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-          <NuxtLink to="/" class="text-2xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
-            MeanC Blog
-          </NuxtLink>
-          <div class="flex items-center space-x-8">
-            <NuxtLink to="/" class="text-gray-700 hover:text-blue-600 transition-colors">
-              首页
-            </NuxtLink>
-            <NuxtLink to="/blog" class="text-gray-700 hover:text-blue-600 transition-colors">
-              博客
-            </NuxtLink>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <PartHeader />
 
     <!-- 主内容区 -->
     <NuxtPage />
   </div>
 </template>
 <script lang="ts">
+import PartHeader from '~/part/Header.vue'
+
+export default {
+  components: {
+    PartHeader
+  }
+}
 </script>
 <style>
 body {

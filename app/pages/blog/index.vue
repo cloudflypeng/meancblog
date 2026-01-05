@@ -5,24 +5,16 @@
 
     <!-- 博客列表 -->
     <section class="py-16 relative z-10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div v-if="articles && articles.length > 0" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <NuxtLink
-            v-for="article in articles"
-            :key="article.path"
-            :to="article.path"
-            class="group"
-          >
+          <NuxtLink v-for="article in articles" :key="article.path" :to="article.path" class="group">
             <UCard class="h-full hover:shadow-lg transition-shadow">
               <!-- 封面图 -->
               <template #header>
-                <div class="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden rounded-t-lg">
-                  <img
-                    v-if="article.cover"
-                    :src="article.cover"
-                    :alt="article.title"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                <div
+                  class="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden rounded-t-lg">
+                  <img v-if="article.cover" :src="article.cover" :alt="article.title"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   <div v-else class="w-full h-full flex items-center justify-center text-white text-4xl font-bold">
                     {{ article.title.charAt(0) }}
                   </div>
@@ -41,12 +33,7 @@
 
                 <!-- 标签 -->
                 <div v-if="article.tags" class="flex flex-wrap gap-2">
-                  <UBadge
-                    v-for="tag in article.tags"
-                    :key="tag"
-                    color="primary"
-                    variant="subtle"
-                  >
+                  <UBadge v-for="tag in article.tags" :key="tag" color="primary" variant="subtle">
                     {{ tag }}
                   </UBadge>
                 </div>

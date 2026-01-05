@@ -1,43 +1,42 @@
 <template>
-  <div>
-    <!-- Hero 部分 -->
-    <section class="py-16 text-center bg-gray-50">
-      <div class="max-w-3xl mx-auto px-4">
-        <h1 class="text-5xl font-bold mb-4">朋友们</h1>
-        <p class="text-xl text-gray-600 mb-6">这里是我的朋友们和合作者</p>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          如果你也想和我交换友链，欢迎通过以下方式联系我。我们一起分享知识，共同进步。
+  <div class="min-h-screen">
+    <!-- Hero 部分 - 简洁左对齐 -->
+    <section class="py-20 px-4">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="text-6xl font-bold mb-6 tracking-tight">Friends</h1>
+        <p class="text-xl text-secondary max-w-2xl leading-relaxed">
+          一些很酷的朋友们。如果你也想交换友链，欢迎联系我。
         </p>
       </div>
     </section>
 
-    <!-- 朋友列表 -->
-    <section class="py-16 relative z-10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <UCard v-for="friend in friends" :key="friend.name" as="a" :href="friend.url" target="_blank"
-            rel="noopener noreferrer" class="group hover:shadow-lg transition-shadow">
-            <!-- 头像 -->
-            <template #header>
-              <div class="overflow-hidden rounded-t-lg bg-gray-100 h-48">
-                <img :src="friend.avatar" :alt="friend.name"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-              </div>
-            </template>
+    <!-- 朋友列表 - 优化卡片设计 -->
+    <section class="pb-20 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <a v-for="friend in friends" :key="friend.name" :href="friend.url" target="_blank" rel="noopener noreferrer"
+            class="group block border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-300 hover:shadow-xl">
 
-            <!-- 信息 -->
-            <div class="space-y-2">
-              <h3 class="text-xl font-bold group-hover:text-blue-600 transition-colors">
+            <!-- 头像区域 -->
+            <div
+              class="relative h-48 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-gray-900 dark:to-gray-800 overflow-hidden">
+              <img :src="friend.avatar" :alt="friend.name"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out" />
+            </div>
+
+            <!-- 信息区域 -->
+            <div class="p-6 space-y-2">
+              <h3 class="text-xl font-semibold group-hover:text-primary transition-colors">
                 {{ friend.name }}
               </h3>
-              <p v-if="friend.desc" class="text-gray-600 text-sm line-clamp-2">
+              <p v-if="friend.desc" class="text-secondary text-sm leading-relaxed line-clamp-2">
                 {{ friend.desc }}
               </p>
-              <p v-else class="text-gray-400 text-sm">
-                一位神秘的合作者
+              <p v-else class="text-tertiary text-sm italic">
+                神秘访客
               </p>
             </div>
-          </UCard>
+          </a>
         </div>
       </div>
     </section>

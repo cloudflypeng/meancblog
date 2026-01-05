@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
+import tailwindcss from "@tailwindcss/vite";
 const siteConfig = {
   site: {
     title: '喝酒不误事Meanc',
@@ -14,9 +15,18 @@ const siteConfig = {
     ogImage: '/og-image.png'
   },
   social: {
-    github: 'https://github.com/yourusername',
-    twitter: 'https://twitter.com/yourusername',
-    linkedin: 'https://linkedin.com/in/yourusername'
+    github: {
+      url: 'https://github.com/cloudflypeng',
+      icon: 'i-simple-icons-github',
+      bg: '#374151',
+      hoverBg: '#1f2937'
+    },
+    x: {
+      url: 'https://twitter.com/meanc_p',
+      icon: 'i-simple-icons-x',
+      bg: '#000000',
+      hoverBg: '#111827'
+    }
   },
   navigation: {
     showHeader: true,
@@ -37,7 +47,20 @@ const friendsData = [
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/content', '@nuxt/ui', '@nuxtjs/tailwindcss'],
+  css: ['./app/assets/css/main.css', './app/assets/css/new.css'],
+  modules: ['@nuxt/content', '@nuxt/ui', '@nuxtjs/color-mode'],
+  colorMode: {
+    classSuffix: '',
+    preference: 'system',
+    fallback: 'dark',
+  },
+  vite: {
+    plugins: [
+      // @ts-ignore
+      tailwindcss(),
+    ],
+  },
+
   app: {
     head: {
       title: siteConfig.site.title,
@@ -77,8 +100,8 @@ export default defineNuxtConfig({
   // SSG 配置
   nitro: {
     prerender: {
-      crawlLinks: true,
-      routes: ['/blog']
+      crawlLinks: false,
+      routes: ['/']
     }
   }
 })

@@ -1,22 +1,31 @@
 <template>
-  <div>
+  <PartBg>
+    <!-- 页面加载进度条 -->
+    <PageProgress />
+
     <!-- 导航栏 -->
     <PartHeader />
 
     <!-- 主内容区 -->
     <NuxtPage />
-  </div>
+  </PartBg>
 </template>
 <script lang="ts">
 import PartHeader from '~/part/Header.vue'
+import PartBg from '~/part/Bg.vue'
 
 export default {
   components: {
-    PartHeader
+    PartHeader,
+    PartBg
   }
 }
 </script>
 <style>
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   padding: 0;
   margin: 0;

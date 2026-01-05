@@ -1,35 +1,18 @@
 <template>
   <div>
     <!-- Hero 部分 -->
-    <section class="min-h-screen w-full relative pt-20 pb-16">
-      <!-- 背景 -->
-      <div class="fixed inset-0 pointer-events-none z-0" :style="{
-        backgroundImage: 'linear-gradient(45deg, transparent 49%, #e5e7eb 49%, #e5e7eb 51%, transparent 51%), linear-gradient(-45deg, transparent 49%, #e5e7eb 49%, #e5e7eb 51%, transparent 51%)',
-        backgroundSize: '40px 40px',
-        WebkitMaskImage: 'radial-gradient(ellipse 80% 80% at 0% 100%, #000 50%, transparent 90%)',
-        maskImage: 'radial-gradient(ellipse 80% 80% at 0% 100%, #000 50%, transparent 90%)'
-      }" />
-
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Intro />
-      </div>
-    </section>
+    <Intro />
 
     <!-- 博客预览部分 -->
-    <section class="relative z-10 py-16 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <BlogList :limit="3" />
-      </div>
-    </section>
-
-    <!-- CTA 部分 -->
-    <section class="relative z-10 py-16 bg-gradient-to-r from-blue-500 to-purple-600">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">探索更多技术内容</h2>
-        <p class="text-xl text-blue-100 mb-8">持续分享前端开发、Vue、Nuxt 等技术文章</p>
-        <UButton to="/blog" class="text-blue-600">
-          浏览所有文章
-        </UButton>
+        <div class="text-center mt-12">
+          <NuxtLink to="/blog"
+            class="inline-block px-6 py-3 border-2 border-primary text-secondary hover:text-primary font-semibold rounded-lg transition-colors">
+            View All Articles
+          </NuxtLink>
+        </div>
       </div>
     </section>
 

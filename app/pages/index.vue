@@ -9,7 +9,7 @@
         <BlogList :limit="3" />
         <div class="text-center mt-12">
           <NuxtLink to="/blog"
-            class="inline-block px-6 py-3 border-2 border-primary text-secondary hover:text-primary font-semibold rounded-lg transition-colors">
+            class="inline-block px-6 py-3 border-2 font-semibold rounded-lg transition-all hover:scale-110">
             View All Articles
           </NuxtLink>
         </div>

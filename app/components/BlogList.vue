@@ -4,7 +4,7 @@
       <!-- 标题 -->
       <div class="mb-12">
         <h2 class="text-4xl font-bold mb-3">Latest Posts</h2>
-        <p class="text-secondary text-lg">探索最新的技术文章和开发经验</p>
+        <p class="text-lg">探索最新的技术文章和开发经验</p>
       </div>
 
       <!-- 博客列表 -->
@@ -27,14 +27,14 @@
                 {{ article.title }}
               </h3>
 
-              <p class="text-secondary text-sm line-clamp-2 leading-relaxed">
+              <p class=" text-sm line-clamp-2 leading-relaxed">
                 {{ article.description }}
               </p>
 
               <!-- 标签 -->
               <div v-if="article.tags && article.tags.length > 0" class="flex flex-wrap gap-2">
                 <span v-for="tag in article.tags?.slice(0, 3)" :key="tag"
-                  class="px-2.5 py-1 text-xs border border-gray-200 dark:border-gray-800 rounded-full text-secondary">
+                  class="px-2.5 py-1 text-xs border border-gray-200 dark:border-gray-800 rounded-full ">
                   {{ tag }}
                 </span>
               </div>
@@ -66,7 +66,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
-        <p class="text-secondary text-lg">暂无文章发布</p>
+        <p class=" text-lg">暂无文章发布</p>
       </div>
     </div>
   </div>

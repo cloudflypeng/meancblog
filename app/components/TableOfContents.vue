@@ -71,7 +71,9 @@ const updateIndicator = () => {
   const el = linkRefs.value[activeId.value]
 
   // 简单的相对定位计算
+  // @ts-ignore
   indicatorStyle.top = el.offsetTop
+  // @ts-ignore
   indicatorStyle.height = el.offsetHeight
   indicatorStyle.opacity = 1
 }

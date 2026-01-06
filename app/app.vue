@@ -1,5 +1,6 @@
 <template>
-  <PartBg>
+  <UApp>
+    <PartBg />
     <!-- 页面加载进度条 -->
     <PageProgress />
 
@@ -8,7 +9,7 @@
 
     <!-- 主内容区 -->
     <NuxtPage />
-  </PartBg>
+  </UApp>
 </template>
 <script lang="ts">
 import PartHeader from '~/part/Header.vue'

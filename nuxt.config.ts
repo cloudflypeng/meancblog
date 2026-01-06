@@ -5,7 +5,7 @@ const siteConfig = {
   site: {
     title: '喝酒不误事Meanc',
     description: 'Welcome to my personal blog',
-    author: '喝酒不误事',
+    author: '喝酒不误事@Meanc',
     favicon: 'https://img.meanc.cc/blog/Peng%20Yunfei.jpg',
     logo: 'https://img.meanc.cc/blog/Peng%20Yunfei.jpg',
     url: 'https://meanc.cc'
@@ -26,6 +26,12 @@ const siteConfig = {
       icon: 'i-simple-icons-x',
       bg: '#000000',
       hoverBg: '#111827'
+    },
+    discord: {
+      url: 'https://discord.gg/t77kfdaG',
+      icon: 'i-simple-icons-discord',
+      bg: '#5865F2',
+      hoverBg: '#4752C4'
     }
   },
   navigation: {

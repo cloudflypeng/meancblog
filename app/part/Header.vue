@@ -1,23 +1,37 @@
 <script setup lang="ts">
+const { siteConfig } = useRuntimeConfig().public
+const route = useRoute()
+
 const links = [
   {
-    label: 'Home',
+    label: '首页',
     icon: 'i-heroicons-home',
     to: '/'
   },
   {
-    label: 'Blog',
+    label: '技术',
     icon: 'i-heroicons-document-text',
     to: '/blog'
   },
   {
-    label: 'Friends',
-    icon: 'i-heroicons-users',
+    label: '项目',
+    icon: 'i-heroicons-bolt',
+    to: '/project'
+  },
+  {
+    label: '友链',
+    icon: 'i-heroicons-user-group',
     to: '/friends'
   }
 ]
 
-const { siteConfig } = useRuntimeConfig().public
+// 移动端菜单状态
+const isMenuOpen = ref(false)
+
+// 路由变化时关闭菜单
+watch(() => route.fullPath, () => {
+  isMenuOpen.value = false
+})
 
 // 滚动隐藏逻辑
 const isHeaderVisible = ref(true)
@@ -51,29 +65,94 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
+
+const closeMenu = () => {
+  isMenuOpen.value = false
+}
 </script>
 
 <template>
-  <header class="fixed w-full z-100 transition-transform duration-300 ease-in-out"
+  <header class="fixed top-0 w-full z-40 transition-transform duration-300 ease-in-out"
     :class="{ '-translate-y-full': !isHeaderVisible }">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
-        <!-- Logo and title -->
-        <div class="flex items-center gap-2">
-          <img :src="siteConfig.site.logo" :alt="siteConfig.site.author" class="w-10 h-10 rounded-md" />
-          <span class="font-bold text-lg text-primary">{{ siteConfig.site.author }}</span>
+
+        <!-- Mobile Menu Button (Left) -->
+        <div class="flex lg:hidden">
+          <UButton icon="i-heroicons-bars-3" variant="ghost" @click="isMenuOpen = true" aria-label="Open menu" />
         </div>
 
-        <!-- Navigation links -->
-        <nav class="flex items-center gap-6">
+        <!-- Logo -->
+        <div class="flex-1 flex justify-center lg:flex-none lg:justify-start">
+          <NuxtLink to="/" class="flex items-center gap-2">
+            <img :src="siteConfig.site.logo" :alt="siteConfig.site.author" class="w-8 h-8 rounded-md" />
+            <span class="font-bold text-lg text-primary hidden sm:block">{{ siteConfig.site.author }}</span>
+          </NuxtLink>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center gap-6">
           <NuxtLink v-for="link in links" :key="link.to" :to="link.to"
-            class="flex items-center gap-2 text-secondary hover:text-primary transition-colors">
-            <UIcon :name="link.icon" />
+            class="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors">
+            <UIcon :name="link.icon" class="w-5 h-5" />
             <span>{{ link.label }}</span>
           </NuxtLink>
           <ThemeToggle />
         </nav>
+
+        <!-- Right Side Utils (Mobile) -->
+        <div class="flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
+        </div>
       </div>
     </div>
   </header>
+
+  <!-- Mobile Menu Overlay (Manual Implementation) -->
+  <Teleport to="body">
+    <div v-if="isMenuOpen" class="fixed inset-0 z-50 lg:hidden flex">
+      <!-- Backdrop -->
+      <div class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity" @click="closeMenu"></div>
+
+      <!-- Drawer -->
+      <div
+        class="relative w-4/5 max-w-xs bg-white dark:bg-gray-900 h-full shadow-2xl p-6 flex flex-col gap-6 transform transition-transform duration-300 ease-in-out slide-in-from-left">
+
+        <!-- Drawer Header -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <img :src="siteConfig.site.logo" class="w-8 h-8 rounded-md" />
+            <span class="font-bold text-lg text-primary">{{ siteConfig.site.author }}</span>
+          </div>
+          <UButton icon="i-heroicons-x-mark" variant="ghost" @click="closeMenu" />
+        </div>
+
+        <!-- Drawer Links -->
+        <nav class="flex flex-col space-y-2">
+          <NuxtLink v-for="link in links" :key="link.to" :to="link.to" @click="closeMenu"
+            class="flex items-center gap-3 px-4 py-3 text-base text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
+            active-class="bg-gray-50 dark:bg-gray-800 text-primary font-medium">
+            <UIcon :name="link.icon" class="w-5 h-5" />
+            <span>{{ link.label }}</span>
+          </NuxtLink>
+        </nav>
+      </div>
+    </div>
+  </Teleport>
 </template>
+
+<style scoped>
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.slide-in-from-left {
+  animation: slideIn 0.3s ease-out forwards;
+}
+</style>

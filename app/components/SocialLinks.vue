@@ -14,13 +14,21 @@ const socialLinks = computed(() => {
 </script>
 
 <template>
-  <div class="flex items-center gap-4">
+  <div class="flex items-center gap-4 md:justify-start justify-center">
     <a v-for="social in socialLinks" :key="social.name" :href="social.url" :title="social.name" target="_blank"
-      rel="noopener noreferrer" :style="{ backgroundColor: social.bg }"
-      @mouseenter="(e) => e.currentTarget.style.backgroundColor = social.hoverBg"
-      @mouseleave="(e) => e.currentTarget.style.backgroundColor = social.bg"
-      class="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl transition-all duration-300 transform hover:scale-110">
+      rel="noopener noreferrer" :style="{ '--bg': social.bg, '--hover-bg': social.hoverBg } as any"
+      class="social-btn w-12 h-12 rounded-full flex items-center justify-center text-white text-xl transition-all duration-300 transform hover:scale-110">
       <UIcon :name="social.icon" />
     </a>
   </div>
 </template>
+
+<style scoped>
+.social-btn {
+  background-color: var(--bg);
+}
+
+.social-btn:hover {
+  background-color: var(--hover-bg);
+}
+</style>

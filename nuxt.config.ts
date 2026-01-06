@@ -94,7 +94,20 @@ export default defineNuxtConfig({
     '/proxy/sync': {
       proxy: { to: 'https://sync.meanc.cc/api/active_app' },
       cors: true
-    }
+    },
+    // 混合渲染配置：大幅提升访问速度
+    // 首页和主要页面：预渲染 (构建时生成 HTML)
+    '/': { prerender: true },
+    '/friends': { prerender: true },
+    '/project': { prerender: true },
+
+    // 博客文章：ISR (增量静态再生)
+    // 允许在不重新部署的情况下，并在后台更新页面缓存 (例如每小时更新一次)
+    '/blog/**': { isr: 3600 },
+
+    // API 路由保持默认 (Serverless Function)
+    // 注意：Vercel Serverless 对 SSE 长连接有时间限制 (10s-60s)
+    '/api/**': { cors: true },
   },
   content: {
     // 配置 Markdown 文件的处理
@@ -113,9 +126,8 @@ export default defineNuxtConfig({
       }
     }
   },
-
-  // SSG 配置
   nitro: {
+    preset: 'vercel',
     prerender: {
       crawlLinks: false,
       routes: ['/']

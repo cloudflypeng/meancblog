@@ -86,7 +86,7 @@ const closeMenu = () => {
         <div class="flex-1 flex justify-center lg:flex-none lg:justify-start">
           <NuxtLink to="/" class="flex items-center gap-2">
             <img :src="siteConfig.site.logo" :alt="siteConfig.site.author" class="w-8 h-8 rounded-md" />
-            <span class="font-bold text-lg text-primary hidden sm:block">{{ siteConfig.site.author }}</span>
+            <span class="font-bold text-lg hidden sm:block">{{ siteConfig.site.author }}</span>
           </NuxtLink>
         </div>
 

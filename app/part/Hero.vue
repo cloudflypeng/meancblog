@@ -18,7 +18,7 @@ onMounted(() => {
       <!-- 左侧文本内容 -->
       <Transition enter-active-class="transition-all duration-1000 ease-out"
         enter-from-class="opacity-0 -translate-x-12" enter-to-class="opacity-100 translate-x-0">
-        <div v-show="isVisible" class="text-primary space-y-6 lg:space-y-8 lg:col-span-2 text-center lg:text-left">
+        <div v-show="isVisible" class="space-y-6 lg:space-y-8 lg:col-span-2 text-center lg:text-left">
           <!-- 欢迎语 -->
           <div>
             <h1 class="text-2xl md:text-3xl font-bold mb-2">
@@ -27,7 +27,7 @@ onMounted(() => {
           </div>
 
           <!-- 专业技能描述 -->
-          <p class="text-secondary text-lg leading-relaxed">
+          <p class="leading-relaxed opacity-70 text-sm">
             Specialized in Vue, React, TypeScript, and building accessible, high-performance web applications.
           </p>
 

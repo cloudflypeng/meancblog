@@ -27,7 +27,7 @@ const socialLinks = computed(() => {
         <div class="space-y-4">
           <div class="flex items-center gap-2">
             <img :src="siteConfig.site.logo" :alt="siteConfig.site.author" class="w-8 h-8 rounded-md" />
-            <span class="font-bold text-xl text-primary">{{ siteConfig.site.author }}</span>
+            <span class="font-bold text-xl">{{ siteConfig.site.author }}</span>
           </div>
           <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed max-w-xs">
             {{ siteConfig.site.description }}

@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from "@tailwindcss/vite"
+
 const siteConfig = {
   site: {
     title: '喝酒不误事Meanc',
@@ -53,20 +54,18 @@ const friendsData = [
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  modules: ['@nuxt/ui', '@nuxt/content'],
   css: ['./app/assets/css/main.css', './app/assets/css/new.css'],
-  modules: ['@nuxt/content', '@nuxt/ui', '@nuxtjs/color-mode'],
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
   colorMode: {
     classSuffix: '',
     preference: 'system',
     fallback: 'dark',
   },
-  vite: {
-    plugins: [
-      // @ts-ignore
-      tailwindcss(),
-    ],
-  },
-
   app: {
     head: {
       title: siteConfig.site.title,
@@ -103,6 +102,7 @@ export default defineNuxtConfig({
     //   }
     // }
   },
+
   // SSG 配置
   nitro: {
     prerender: {

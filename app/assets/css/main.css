@@ -1,64 +1,11 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
-@layer base {
-  /* 启用 View Transitions */
-  html {
-    view-transition-name: root;
-  }
-
-  :root {
-    /* Light mode colors */
-    --color-background: 255 255 255;
-    --color-foreground: 17 24 39;
-    --color-primary: 59 130 246;
-    --color-secondary: 107 114 128;
-    --color-muted: 249 250 251;
-    --color-muted-foreground: 107 114 128;
-    --color-border: 229 231 235;
-    --color-header-bg: 255 255 255;
-  }
-
-  .dark {
-    /* Dark mode colors */
-    --color-background: 17 24 39;
-    --color-foreground: 243 244 246;
-    --color-primary: 96 165 250;
-    --color-secondary: 156 163 175;
-    --color-muted: 31 41 55;
-    --color-muted-foreground: 156 163 175;
-    --color-border: 55 65 81;
-    --color-header-bg: 17 24 39;
-  }
-}
-
-@layer utilities {
-  .text-primary {
-    color: rgb(var(--color-foreground));
-  }
-  
-  .text-secondary {
-    color: rgb(var(--color-secondary));
-  }
-  
-  .bg-primary {
-    background-color: rgb(var(--color-background));
-  }
-  
-  .bg-muted {
-    background-color: rgb(var(--color-muted));
-  }
-  
-  .bg-header {
-    background-color: rgba(var(--color-header-bg) / 0.8);
-  }
-  
-  .border-primary {
-    border-color: rgb(var(--color-border));
-  }
-}
-
-html{
+html {
+  view-transition-name: root;
   font-family: Maple;
   overflow-x: hidden;
 }
+
+
+

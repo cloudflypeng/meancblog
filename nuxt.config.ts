@@ -86,7 +86,14 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteConfig,
-      friendsData
+      friendsData,
+      syncToken: process.env.NUXT_SYNC_TOKEN
+    }
+  },
+  routeRules: {
+    '/proxy/sync': {
+      proxy: { to: 'https://sync.meanc.cc/api/active_app' },
+      cors: true
     }
   },
   content: {

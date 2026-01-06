@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import ActiveApp from '~/components/ActiveApp.vue'
 
-const { siteConfig } = useRuntimeConfig().public
+const config = useRuntimeConfig()
+const siteConfig = config.public.siteConfig
 const route = useRoute()
 
 const links = [
@@ -88,11 +90,13 @@ const closeMenu = () => {
         </div>
 
         <!-- Logo -->
-        <div class="flex-1 flex justify-center lg:flex-none lg:justify-start">
+        <div class="flex-1 flex items-center gap-2 justify-center lg:flex-none lg:justify-start">
+          <ActiveApp />
           <NuxtLink to="/" class="flex items-center gap-2">
-            <img :src="siteConfig.site.logo" :alt="siteConfig.site.author" class="w-8 h-8 rounded-md" />
+            <!-- <img :src="siteConfig.site.logo" :alt="siteConfig.site.author" class="w-8 h-8 rounded-md" /> -->
             <span class="font-bold text-lg hidden sm:block">{{ siteConfig.site.author }}</span>
           </NuxtLink>
+
         </div>
 
         <!-- Desktop Navigation -->

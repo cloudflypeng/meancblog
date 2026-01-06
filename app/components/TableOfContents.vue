@@ -125,38 +125,46 @@ const scrollToHeading = (id: string) => {
 let observer: IntersectionObserver | null = null
 
 onMounted(() => {
-  const options = {
-    root: null,
-    rootMargin: '-100px 0px -80% 0px', // 视口顶部 100px 到 底部 80% 的区域触发
-    threshold: 0
-  }
+  // 延迟初始化，确保 DOM 完成渲染
+  setTimeout(() => {
+    // 尝试获取滚动容器作为 root，增强兼容性
+    const scrollRoot = document.querySelector('#scroll-wrapper [data-overlayscrollbars-viewport]') ||
+      document.querySelector('#scroll-wrapper .os-viewport') ||
+      document.getElementById('scroll-wrapper')
 
-  observer = new IntersectionObserver((entries) => {
-    // 如果是点击触发的滚动，忽略观察者的更新
-    if (isClickScrolling.value) return
+    const options = {
+      root: scrollRoot, // 明确指定滚动容器为 root
+      rootMargin: '-100px 0px -80% 0px', // 保持原有触发逻辑
+      threshold: 0
+    }
 
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        activeId.value = entry.target.id
+    observer = new IntersectionObserver((entries) => {
+      // 如果是点击触发的滚动，忽略观察者的更新
+      if (isClickScrolling.value) return
+
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          activeId.value = entry.target.id
+        }
+      })
+    }, options)
+
+    // 观察 prose 内容区域内的标题，避免干扰
+    const headings = document.querySelectorAll('.prose h2, .prose h3')
+    headings.forEach((heading) => {
+      if (heading.id) {
+        observer?.observe(heading)
       }
     })
-  }, options)
 
-  // 观察所有的标题元素
-  document.querySelectorAll('h2, h3').forEach((heading) => {
-    if (heading.id) {
-      observer?.observe(heading)
-    }
-  })
-
-  // 初始化指示器位置
-  setTimeout(() => {
-    // 如果没有滚动触发，默认选中第一个
+    // 初始化指示器位置
     if (!activeId.value && props.toc?.links?.[0]?.id) {
       activeId.value = props.toc.links[0].id
     }
-    updateIndicator()
-  }, 200)
+    nextTick(() => {
+      updateIndicator()
+    })
+  }, 500) // 500ms 延迟确保 ContentRenderer 完成 content 渲染
 })
 
 onUnmounted(() => {

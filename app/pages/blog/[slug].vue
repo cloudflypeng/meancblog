@@ -13,7 +13,7 @@
         </NuxtLink>
 
         <!-- 文章标题 -->
-        <h1 class="text-5xl font-bold mb-6 leading-tight">{{ article.title }}</h1>
+        <h1 class="text-5xl font-bold mb-6 leading-tight my-2">{{ article.title }}</h1>
 
         <!-- 文章元信息 -->
         <div class="flex flex-wrap items-center gap-6  text-sm mb-8 pb-8 border-b border-gray-200 dark:border-gray-800">

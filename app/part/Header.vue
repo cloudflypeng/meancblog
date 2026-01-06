@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
 const { siteConfig } = useRuntimeConfig().public
 const route = useRoute()
 
@@ -38,8 +40,9 @@ const isHeaderVisible = ref(true)
 const lastScrollY = ref(0)
 const scrollThreshold = 100 // 滚动阈值（像素）
 
-const handleScroll = () => {
-  const currentScrollY = window.scrollY
+const handleScroll = (e: Event) => {
+  const target = e.target as HTMLElement
+  const currentScrollY = target.scrollTop
 
   // 如果滚动距离小于阈值，始终显示
   if (currentScrollY < scrollThreshold) {
@@ -59,11 +62,13 @@ const handleScroll = () => {
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll, { passive: true })
+  const scrollWrapper = document.getElementById('scroll-wrapper')
+  scrollWrapper?.addEventListener('scroll', handleScroll, { passive: true, capture: true })
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
+  const scrollWrapper = document.getElementById('scroll-wrapper')
+  scrollWrapper?.removeEventListener('scroll', handleScroll, { capture: true } as EventListenerOptions)
 })
 
 const closeMenu = () => {

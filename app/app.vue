@@ -1,6 +1,6 @@
 <template>
   <UApp>
-    <OverlayScrollbarsComponent defer class="h-screen w-full"
+    <OverlayScrollbarsComponent id="scroll-wrapper" defer class="h-screen w-full"
       :options="{ scrollbars: { autoHide: 'move', clickScroll: true } }">
       <PartBg />
       <!-- 页面加载进度条 -->

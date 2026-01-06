@@ -87,7 +87,9 @@ watch(activeId, () => {
 
 const scrollToHeading = (id: string) => {
   const element = document.getElementById(id)
-  if (element) {
+  const scrollWrapper = document.querySelector('#scroll-wrapper [data-overlayscrollbars-viewport]') || document.querySelector('#scroll-wrapper .os-viewport') || document.getElementById('scroll-wrapper')
+
+  if (element && scrollWrapper) {
     // 标记为正在通过点击滚动，暂停 Observer 更新
     isClickScrolling.value = true
     if (scrollTimeout) clearTimeout(scrollTimeout)
@@ -98,13 +100,20 @@ const scrollToHeading = (id: string) => {
     }, 1000)
 
     const offset = 100 // 顶部偏移量
-    const bodyRect = document.body.getBoundingClientRect().top
-    const elementRect = element.getBoundingClientRect().top
-    const elementPosition = elementRect - bodyRect
-    const offsetPosition = elementPosition - offset
 
-    window.scrollTo({
-      top: offsetPosition,
+    const elementRectTop = element.getBoundingClientRect().top
+    const wrapperRectTop = scrollWrapper.getBoundingClientRect().top
+    const currentScrollTop = scrollWrapper.scrollTop
+
+    // Calculate target position
+    // We need element to be at 'offset' from wrapper top
+    // Current distance is (elementRectTop - wrapperRectTop)
+    // Delta needed: (elementRectTop - wrapperRectTop) - offset
+
+    const targetScrollTop = currentScrollTop + (elementRectTop - wrapperRectTop) - offset
+
+    scrollWrapper.scrollTo({
+      top: targetScrollTop,
       behavior: 'smooth'
     })
 

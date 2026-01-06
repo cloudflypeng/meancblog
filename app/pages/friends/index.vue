@@ -1,45 +1,36 @@
 <template>
-  <div class="min-h-screen">
-    <!-- Hero 部分 - 简洁左对齐 -->
-    <section class="py-20 px-4">
-      <div class="max-w-6xl mx-auto">
-        <h1 class="text-6xl font-bold mb-6 tracking-tight">Friends</h1>
-        <p class="text-xl text-secondary max-w-2xl leading-relaxed">
-          一些很酷的朋友们。如果你也想交换友链，欢迎联系我。
-        </p>
+  <div class="min-h-screen py-20">
+    <!-- 头部 -->
+    <div class="max-w-4xl mx-auto px-6 mb-12">
+      <h1 class="text-4xl font-bold mb-4">朋友们</h1>
+      <p class="text-gray-500 dark:text-gray-400">一些很酷的朋友们。如果你也想交换友链，欢迎联系我。</p>
+    </div>
+
+    <!-- 朋友列表 -->
+    <div class="max-w-4xl mx-auto px-6 pb-20">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <a v-for="friend in friends" :key="friend.name" :href="friend.url" target="_blank" rel="noopener noreferrer"
+          class="flex items-start p-4 border border-gray-200 dark:border-gray-800 rounded-xl hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-300 group hover:bg-gray-50 dark:hover:bg-gray-800/50">
+
+          <!-- 头像 -->
+          <div class="shrink-0 mr-4">
+            <img :src="friend.avatar" :alt="friend.name"
+              class="w-14 h-14 rounded-full object-cover border border-gray-100 dark:border-gray-800 group-hover:scale-110 transition-transform duration-300" />
+          </div>
+
+          <!-- 信息 -->
+          <div class="flex-1 min-w-0 py-1">
+            <h3
+              class="text-lg font-bold text-gray-900 dark:text-white truncate group-hover:text-primary transition-colors">
+              {{ friend.name }}
+            </h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mt-1">
+              {{ friend.desc || '这个朋友很懒，什么都没写' }}
+            </p>
+          </div>
+        </a>
       </div>
-    </section>
-
-    <!-- 朋友列表 - 优化卡片设计 -->
-    <section class="pb-20 px-4">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <a v-for="friend in friends" :key="friend.name" :href="friend.url" target="_blank" rel="noopener noreferrer"
-            class="group block border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-300 hover:shadow-xl">
-
-            <!-- 头像区域 -->
-            <div
-              class="relative h-48 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-gray-900 dark:to-gray-800 overflow-hidden">
-              <img :src="friend.avatar" :alt="friend.name"
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out" />
-            </div>
-
-            <!-- 信息区域 -->
-            <div class="p-6 space-y-2">
-              <h3 class="text-xl font-semibold group-hover:text-primary transition-colors">
-                {{ friend.name }}
-              </h3>
-              <p v-if="friend.desc" class="text-secondary text-sm leading-relaxed line-clamp-2">
-                {{ friend.desc }}
-              </p>
-              <p v-else class="text-tertiary text-sm italic">
-                神秘访客
-              </p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <PartFooter />
@@ -56,15 +47,15 @@ interface Friend {
   desc?: string
 }
 
-const { friendsData } = useRuntimeConfig().public
-const friends = ref<Friend[]>(friendsData as any)
+const config = useRuntimeConfig()
+const friends = config.public.friendsData as Friend[]
 
 useHead({
-  title: '朋友们 - MeanC Blog',
+  title: 'Friends - MeanC Blog',
   meta: [
     {
       name: 'description',
-      content: '我的朋友们和合作者，欢迎交换友链'
+      content: '我的朋友们，以及优秀的友链展示'
     }
   ]
 })

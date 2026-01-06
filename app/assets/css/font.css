@@ -119,7 +119,6 @@ blockquote {
   margin: 1.2em 0;
   padding: 0.6em 1em;
   border-left: 4px solid #e5e7eb;
-  background-color: #f9f
 
 }
 
@@ -131,7 +130,6 @@ code, pre {
 /* inline code */
 code {
   padding: 0.15em 0.35em;
-  background-color: #f3f4f6;
   border-radius: 4px;
 }
 
@@ -144,7 +142,6 @@ pre {
 pre code {
   padding: 0;
   background: none;
-  color: inherit;
 }
 
 /* =========================

@@ -87,6 +87,8 @@
           </div>
         </div>
       </div>
+      <!-- 目录导航 -->
+      <TableOfContents v-if="article && article.body && article.body.toc" :toc="article.body.toc" />
     </article>
 
     <!-- 404 状态 -->
@@ -109,6 +111,7 @@
 <script setup lang="ts">
 import type { BlogArticle } from '~/types/content'
 import PartFooter from '~/part/Footer.vue'
+import TableOfContents from '~/components/TableOfContents.vue'
 
 const route = useRoute()
 const slug = route.params.slug as string

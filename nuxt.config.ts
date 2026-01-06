@@ -99,6 +99,10 @@ export default defineNuxtConfig({
       toc: {
         depth: 3,
         searchDepth: 3
+      },
+      anchorLinks: {
+        depth: 3,
+        exclude: [1]
       }
     }
   },

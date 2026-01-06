@@ -7,14 +7,15 @@
 
       <!-- 标签筛选 -->
       <div v-if="tags.length > 0" class="flex flex-wrap gap-2">
-        <button @click="selectedTag = null"
-          class="px-3 py-1 text-sm rounded-full transition-colors duration-200" :class="!selectedTag
+        <button @click="selectedTag = null" class="px-3 py-1 text-sm rounded-full transition-colors duration-200"
+          :class="!selectedTag
             ? 'bg-black text-white dark:bg-white dark:text-black font-medium'
             : 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'">
           全部
         </button>
         <button v-for="tag in tags" :key="tag" @click="toggleTag(tag)"
-          class="px-3 py-1 text-sm rounded-full transition-colors duration-200" :class="selectedTag === tag
+          class="px-3 py-1 text-sm rounded-full transition-colors duration-200"
+          :class="selectedTag === tag
             ? 'bg-black text-white dark:bg-white dark:text-black font-medium'
             : 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'">
           #{{ tag }}
@@ -52,7 +53,7 @@
             <div v-if="article.tags" class="flex flex-wrap gap-2">
               <span v-for="tag in article.tags" :key="tag"
                 class="px-2.5 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors">
-           
+
                 #{{ tag }}
               </span>
             </div>

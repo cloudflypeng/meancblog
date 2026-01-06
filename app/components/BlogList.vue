@@ -85,9 +85,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 // 查询博客文章
 const { data: articles } = await useAsyncData('blog-preview', () =>
-  (queryCollection as any)('blog')
-    .order('date', 'DESC')
-    .all() as Promise<BlogArticle[]>
+  queryCollection('blog').order('date', 'DESC').all()
 )
 
 // 限制显示数量

@@ -12,7 +12,7 @@
               <!-- 封面图 -->
               <template #header>
                 <div
-                  class="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden rounded-t-lg">
+                  class="aspect-video bg-linear-to-br from-blue-500 to-purple-600 relative overflow-hidden rounded-t-lg">
                   <img v-if="article.cover" :src="article.cover" :alt="article.title"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   <div v-else class="w-full h-full flex items-center justify-center text-white text-4xl font-bold">
@@ -61,13 +61,12 @@
 </template>
 
 <script setup lang="ts">
+
 import type { BlogArticle } from '~/types/content'
 import PartFooter from '~/part/Footer.vue'
 
 const { data: articles } = await useAsyncData('blog-list', () =>
-  (queryCollection as any)('blog')
-    .order('date', 'DESC')
-    .all() as Promise<BlogArticle[]>
+  queryCollection('blog').order('date', 'DESC').all()
 )
 
 const formatDate = (date: string) => {

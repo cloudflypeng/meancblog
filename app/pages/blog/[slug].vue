@@ -116,15 +116,13 @@ const route = useRoute()
 const slug = route.params.slug as string
 
 // 获取当前文章
-const { data: article } = await useAsyncData(`blog-${slug}`, () =>
-  queryCollection('blog').path(`/blog/${slug}`).first() as Promise<BlogArticle>
-)
+const { data: article } = await useAsyncData(`blog-${slug}`, async () => {
+  return queryCollection('blog').path(`/blog/${slug}`).first()
+})
 
 // 获取所有文章用于上下篇导航
 const { data: allArticles } = await useAsyncData('all-blog-articles', () =>
-  (queryCollection as any)('blog')
-    .order('date', 'DESC')
-    .all() as Promise<BlogArticle[]>
+  queryCollection('blog').order('date', 'DESC').all()
 )
 
 // 计算上一篇和下一篇

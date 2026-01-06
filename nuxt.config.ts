@@ -91,16 +91,16 @@ export default defineNuxtConfig({
   },
   content: {
     // 配置 Markdown 文件的处理
-    // highlight: {
-    //   theme: 'github-dark',
-    //   preload: ['javascript', 'typescript', 'vue', 'css', 'html', 'bash', 'json']
-    // },
-    // markdown: {
-    //   toc: {
-    //     depth: 3,
-    //     searchDepth: 3
-    //   }
-    // }
+    highlight: {
+      theme: 'github-dark',
+      preload: ['javascript', 'typescript', 'vue', 'css', 'html', 'bash', 'json']
+    },
+    markdown: {
+      toc: {
+        depth: 3,
+        searchDepth: 3
+      }
+    }
   },
 
   // SSG 配置

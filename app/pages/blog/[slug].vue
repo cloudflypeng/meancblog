@@ -4,8 +4,7 @@
     <article v-if="article" class="py-20 px-4">
       <div class="max-w-3xl mx-auto">
         <!-- 返回按钮 -->
-        <NuxtLink to="/blog"
-          class="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors mb-8 group">
+        <NuxtLink to="/blog" class="inline-flex items-center gap-2  hover:text-primary transition-colors mb-8 group">
           <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor"
             viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -17,8 +16,7 @@
         <h1 class="text-5xl font-bold mb-6 leading-tight">{{ article.title }}</h1>
 
         <!-- 文章元信息 -->
-        <div
-          class="flex flex-wrap items-center gap-6 text-secondary text-sm mb-8 pb-8 border-b border-gray-200 dark:border-gray-800">
+        <div class="flex flex-wrap items-center gap-6  text-sm mb-8 pb-8 border-b border-gray-200 dark:border-gray-800">
           <div class="flex items-center gap-2">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -52,7 +50,7 @@
 
         <!-- 文章描述 -->
         <div v-if="article.description"
-          class="text-xl text-secondary leading-relaxed mb-12 p-6 border-l-4 border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 rounded-r-lg">
+          class="text-xl  leading-relaxed mb-12 p-6 border-l-4 border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 rounded-r-lg">
           {{ article.description }}
         </div>
 
@@ -95,7 +93,7 @@
     <div v-else class="min-h-[60vh] flex items-center justify-center px-4">
       <div class="text-center">
         <h1 class="text-6xl font-bold mb-4">404</h1>
-        <p class="text-xl text-secondary mb-8">文章未找到</p>
+        <p class="text-xl  mb-8">文章未找到</p>
         <NuxtLink to="/blog"
           class="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-gray-700 rounded-full hover:border-gray-500 dark:hover:border-gray-500 transition-colors">
           返回博客列表

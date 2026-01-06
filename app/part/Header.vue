@@ -9,7 +9,7 @@ const links = [
     to: '/'
   },
   {
-    label: '技术',
+    label: '文章',
     icon: 'i-heroicons-document-text',
     to: '/blog'
   },

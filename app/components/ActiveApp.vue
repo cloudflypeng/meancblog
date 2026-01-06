@@ -27,7 +27,8 @@ let reconnectTimer: number | null = null
 
 function connect() {
   try {
-    const url = `/api/active_app/stream`
+    // 直接连接到 Cloudflare Worker，绕过 Nuxt/Vercel 代理
+    const url = `https://sync.meanc.cc/api/active_app/stream`
     es = new EventSource(url)
     es.onmessage = (e) => {
       try {

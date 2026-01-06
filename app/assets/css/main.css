@@ -1,10 +1,27 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+@import "overlayscrollbars/styles/overlayscrollbars.css";
 
 html {
   view-transition-name: root;
   font-family: Maple;
-  overflow-x: hidden;
+  overflow: hidden; /* 禁用原生滚动条 */
+}
+
+/* 自定义 OverlayScrollbars 样式 */
+.os-theme-dark,
+.os-theme-light {
+    --os-size: 10px;
+    --os-handle-bg: rgba(0, 0, 0, 0.2);
+    --os-handle-bg-hover: rgba(0, 0, 0, 0.4);
+    --os-handle-bg-active: rgba(0, 0, 0, 0.5);
+}
+
+.dark .os-theme-dark,
+.dark .os-theme-light {
+    --os-handle-bg: rgba(255, 255, 255, 0.2);
+    --os-handle-bg-hover: rgba(255, 255, 255, 0.4);
+    --os-handle-bg-active: rgba(255, 255, 255, 0.5);
 }
 
 

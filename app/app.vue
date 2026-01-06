@@ -1,35 +1,29 @@
 <template>
   <UApp>
-    <PartBg />
-    <!-- 页面加载进度条 -->
-    <PageProgress />
+    <OverlayScrollbarsComponent defer class="h-screen w-full"
+      :options="{ scrollbars: { autoHide: 'move', clickScroll: true } }">
+      <PartBg />
+      <!-- 页面加载进度条 -->
+      <PageProgress />
 
-    <!-- 导航栏 -->
-    <PartHeader />
+      <!-- 导航栏 -->
+      <PartHeader />
 
-    <!-- 主内容区 -->
-    <NuxtPage />
+      <!-- 主内容区 -->
+      <NuxtPage />
+    </OverlayScrollbarsComponent>
   </UApp>
 </template>
-<script lang="ts">
+<script setup lang="ts">
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 import PartHeader from '~/part/Header.vue'
 import PartBg from '~/part/Bg.vue'
-
-export default {
-  components: {
-    PartHeader,
-    PartBg
-  }
-}
 </script>
 <style>
-html {
-  scrollbar-gutter: stable;
-}
-
 body {
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 
 .outline-text {

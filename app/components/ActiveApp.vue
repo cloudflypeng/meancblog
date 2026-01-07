@@ -1,79 +1,82 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const config = useRuntimeConfig()
 const token = config.public.syncToken
 
-// 保留 useFetch 用于首屏获取初始值
-const { data: syncData, refresh } = useFetch('/proxy/sync', {
-  server: false,
-  headers: {
-    Authorization: `Bearer ${token}`
-  }
-})
-
+// 当前前台 app 文本
 const syncText = ref('')
 
-watch(syncData, (v) => {
-  if (v) {
-    const anyv = v as any
-    syncText.value = anyv.app + ' on ' + anyv.device
-  }
-})
-
-
-let es: EventSource | null = null
+// WebSocket 实例
+let ws: WebSocket | null = null
 let reconnectTimer: number | null = null
 
-function connect() {
+function connectWS() {
   try {
-    // 直接连接到 Cloudflare Worker，绕过 Nuxt/Vercel 代理
-    const url = `https://sync.meanc.cc/api/active_app/stream`
-    es = new EventSource(url)
-    es.onmessage = (e) => {
+    // 通过 Nuxt 服务器代理连接 WebSocket
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
+    const url = `${protocol}//${window.location.host}/ws`
+    ws = new WebSocket(url)
+
+    ws.onopen = () => {
+      console.log('✅ WS connected')
+    }
+
+    ws.onmessage = (e) => {
       try {
         const payload = JSON.parse(e.data)
-        syncText.value = payload.app + ' on ' + payload.device
+        syncText.value = payload.app + ' on ' + (payload.device ?? 'unknown')
       } catch {
         syncText.value = e.data
       }
     }
-    es.onerror = (e) => {
-      console.log('SSE connection error:', es?.readyState)
-      if (es) {
-        try { es.close() } catch {}
-        es = null
-      }
-      if (reconnectTimer) clearTimeout(reconnectTimer)
-      reconnectTimer = window.setTimeout(() => {
-        connect()
-      }, 3000)
+
+    ws.onerror = (e) => {
+      console.log('⚠️ WS error', e)
+      cleanupWS()
+      scheduleReconnect()
     }
-  } catch {
-    if (reconnectTimer) clearTimeout(reconnectTimer)
-    reconnectTimer = window.setTimeout(() => {
-      // connect()
-    }, 3000)
+
+    ws.onclose = () => {
+      console.log('⚠️ WS closed')
+      cleanupWS()
+      scheduleReconnect()
+    }
+  } catch (e) {
+    console.log('WS connection failed:', e)
+    scheduleReconnect()
   }
 }
 
+function cleanupWS() {
+  if (ws) {
+    ws.close()
+    ws = null
+  }
+}
+
+function scheduleReconnect() {
+  if (reconnectTimer) clearTimeout(reconnectTimer)
+  reconnectTimer = window.setTimeout(() => {
+    connectWS()
+  }, 3000)
+}
+
 onMounted(() => {
-  if (typeof EventSource !== 'undefined') {
-    connect()
+  if (typeof WebSocket !== 'undefined') {
+    connectWS()
   }
 })
 
 onUnmounted(() => {
-  if (es) {
-    es.close()
-    es = null
-  }
+  cleanupWS()
   if (reconnectTimer) {
     clearTimeout(reconnectTimer)
     reconnectTimer = null
   }
 })
 </script>
+
 <template>
   <div class="text-xs font-mono text-gray-500">{{ syncText }}</div>
 </template>

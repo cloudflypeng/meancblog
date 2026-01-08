@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen py-20">
+  <div class="min-h-screen pt-20">
     <!-- 头部 -->
     <div class="max-w-4xl mx-auto px-6 mb-16">
       <h1 class="text-4xl font-bold mb-4">文章</h1>

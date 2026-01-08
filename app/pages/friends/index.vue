@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen py-20">
+  <div class="min-h-screen pt-20">
     <!-- 头部 -->
     <div class="max-w-4xl mx-auto px-6 mb-12">
       <h1 class="text-4xl font-bold mb-4">朋友们</h1>
@@ -25,7 +25,7 @@
               {{ friend.name }}
             </h3>
             <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mt-1">
-              {{ friend.desc || '这个朋友很懒，什么都没写' }}
+              {{ friend.desc || '' }}
             </p>
           </div>
         </a>

@@ -48,8 +48,7 @@ router.afterEach(() => {
 
 <template>
   <Transition name="progress" @enter="(el) => { }" @leave="(el) => { }">
-    <div v-if="isLoading || progress > 0"
-      class="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 shadow-lg z-[9999]"
+    <div v-if="isLoading || progress > 0" class="progress-color fixed top-0 left-0 h-1 shadow-lg z-9999"
       :style="{ width: progress + '%' }" style="transition: width 0.3s ease" />
   </Transition>
 </template>
@@ -63,5 +62,12 @@ router.afterEach(() => {
 .progress-enter-from,
 .progress-leave-to {
   opacity: 0;
+}
+
+/* 浅豆绿 */
+.progress-color {
+  --color-light-green: #B2C8A0;
+  --sun-set-orange: #E36D4F;
+  background-color: var(--sun-set-orange);
 }
 </style>

@@ -33,19 +33,19 @@
 
 <style scoped>
 .masonry {
-  column-count: 2;
+  column-count: 1;
   column-gap: 1rem;
 }
 
 @media (min-width: 640px) {
   .masonry {
-    column-count: 1;
+    column-count: 2;
   }
 }
 
 @media (min-width: 1024px) {
   .masonry {
-    column-count: 2;
+    column-count: 3;
   }
 }
 

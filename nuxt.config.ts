@@ -33,6 +33,12 @@ const siteConfig = {
       icon: 'i-simple-icons-discord',
       bg: '#5865F2',
       hoverBg: '#4752C4'
+    },
+    afdian: {
+      url: 'https://afdian.com/a/meanc',
+      icon: 'i-simple-icons-afdian',
+      bg: '#5e2299',
+      hoverBg: '#5e2299'
     }
   },
   navigation: {
@@ -108,23 +114,6 @@ export default defineNuxtConfig({
     // API 路由保持默认 (Serverless Function)
     // 注意：Vercel Serverless 对 SSE 长连接有时间限制 (10s-60s)
     '/api/**': { cors: true },
-  },
-  content: {
-    // 配置 Markdown 文件的处理
-    highlight: {
-      theme: 'github-dark',
-      preload: ['javascript', 'typescript', 'vue', 'css', 'html', 'bash', 'json']
-    },
-    markdown: {
-      toc: {
-        depth: 3,
-        searchDepth: 3
-      },
-      anchorLinks: {
-        depth: 3,
-        exclude: [1]
-      }
-    }
   },
   nitro: {
     preset: 'vercel',

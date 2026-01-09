@@ -31,14 +31,10 @@
         </a>
       </div>
     </div>
-
-    <!-- Footer -->
-    <PartFooter />
   </div>
 </template>
 
 <script setup lang="ts">
-import PartFooter from '~/part/Footer.vue'
 
 interface Friend {
   name: string

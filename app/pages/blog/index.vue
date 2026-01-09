@@ -66,9 +66,6 @@
         <p class="text-gray-500 text-lg">暂无文章</p>
       </div>
     </div>
-
-    <!-- Footer -->
-    <PartFooter />
   </div>
 </template>
 

@@ -102,15 +102,10 @@
         </NuxtLink>
       </div>
     </div>
-
-    <!-- Footer -->
-    <PartFooter />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { BlogArticle } from '~/types/content'
-import PartFooter from '~/part/Footer.vue'
 import TableOfContents from '~/components/TableOfContents.vue'
 
 const route = useRoute()

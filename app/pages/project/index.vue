@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Experience from '~/components/Experience.vue'
-import PartFooter from '~/part/Footer.vue'
 
 useHead({
   title: 'Projects - MeanC Blog',
@@ -16,6 +15,5 @@ useHead({
 <template>
   <div class="bg-gray-50 dark:bg-gray-900">
     <Experience />
-    <PartFooter />
   </div>
 </template>

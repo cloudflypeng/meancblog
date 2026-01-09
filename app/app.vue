@@ -11,6 +11,7 @@
 
       <!-- 主内容区 -->
       <NuxtPage />
+      <Footer />
     </OverlayScrollbarsComponent>
   </UApp>
 </template>
@@ -18,6 +19,7 @@
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 import PartHeader from '~/part/Header.vue'
 import PartBg from '~/part/Bg.vue'
+import Footer from '~/part/Footer.vue'
 </script>
 <style>
 body {

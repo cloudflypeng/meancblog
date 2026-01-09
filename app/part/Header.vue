@@ -23,6 +23,11 @@ const links = [
     to: '/project'
   },
   {
+    label: '相册',
+    icon: 'i-heroicons-photo',
+    to: '/gallery'
+  },
+  {
     label: '友链',
     icon: 'i-heroicons-user-group',
     to: '/friends'

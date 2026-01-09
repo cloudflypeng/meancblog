@@ -15,16 +15,12 @@
         </div>
       </div>
     </section>
-
-    <!-- Footer -->
-    <PartFooter />
   </div>
 </template>
 
 <script setup lang="ts">
 import Intro from '~/part/Hero.vue'
 import BlogList from '~/components/BlogList.vue'
-import PartFooter from '~/part/Footer.vue'
 
 useHead({
   title: 'MeanC Blog',

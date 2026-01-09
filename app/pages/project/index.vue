@@ -4,7 +4,7 @@
     <section class="mb-20">
       <div class="flex items-center gap-3 mb-8">
         <div
-          class="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 ring-1 ring-blue-100 dark:ring-blue-500/20 flex items-center justify-center">
+          class="p-2.5 rounded-xl text-blue-600 dark:text-blue-400 ring-1 ring-blue-100 dark:ring-blue-500/20 flex items-center justify-center">
           <Icon icon="heroicons:briefcase-20-solid" class="w-6 h-6" />
         </div>
         <div>
@@ -15,7 +15,7 @@
 
       <div class="grid gap-6 md:grid-cols-2">
         <div v-for="project in companyProjects" :key="project.name"
-          class="group relative bg-white dark:bg-gray-800/50 rounded-2xl p-6 border border-gray-100 dark:border-gray-800 hover:border-blue-200 dark:hover:border-blue-800 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/5 hover:-translate-y-1 cursor-pointer overflow-hidden"
+          class="group relative rounded-2xl p-6 border border-gray-100 dark:border-gray-800 hover:border-blue-200 dark:hover:border-blue-800 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/5 hover:-translate-y-1 cursor-pointer overflow-hidden"
           @click="goTo(project.url)">
 
           <div
@@ -87,7 +87,7 @@
     <section>
       <div class="flex items-center gap-3 mb-8">
         <div
-          class="p-2.5 rounded-xl bg-green-50 dark:bg-green-500/10 text-green-600 dark:text-green-400 ring-1 ring-green-100 dark:ring-green-500/20 flex items-center justify-center">
+          class="p-2.5 rounded-xl text-green-600 dark:text-green-400 ring-1 ring-green-100 dark:ring-green-500/20 flex items-center justify-center">
           <Icon icon="heroicons:code-bracket-square-20-solid" class="w-6 h-6" />
         </div>
         <div>
@@ -98,7 +98,7 @@
 
       <div class="grid gap-6 md:grid-cols-2">
         <div v-for="project in opensourceProjects" :key="project.name"
-          class="group relative bg-white dark:bg-gray-800/50 rounded-2xl p-6 border border-gray-100 dark:border-gray-800 hover:border-green-200 dark:hover:border-green-800 transition-all duration-300 hover:shadow-xl hover:shadow-green-500/5 hover:-translate-y-1 cursor-pointer overflow-hidden"
+          class="group relative rounded-2xl p-6 border border-gray-100 dark:border-gray-800 hover:border-green-200 dark:hover:border-green-800 transition-all duration-300 hover:shadow-xl hover:shadow-green-500/5 hover:-translate-y-1 cursor-pointer overflow-hidden"
           @click="goTo(project.url)">
 
           <div

@@ -1,0 +1,74 @@
+[
+  {
+    "type": "company",
+    "name": "数据分析 SaaS 平台",
+    "role": "前端开发工程师",
+    "year": "2020",
+    "techStack": "react, redux, antd, antv, echarts, fetch",
+    "description": "分析集团数据采集 SDK 数据，提供实时分析、日活趋势、运营商分析、用户地域分析等固定报表功能",
+    "url": ""
+  },
+  {
+    "type": "company",
+    "name": "数据治理软件",
+    "role": "全栈开发",
+    "year": "2022",
+    "techStack": "react, redux, antd, antv, echarts, fetch",
+    "description": "数据采集、存储、管理、应用、分析",
+    "url": ""
+  },
+  {
+    "type": "company",
+    "name": "数据可视化大屏",
+    "role": "前端负责人",
+    "year": "2023",
+    "techStack": "vue, pinia, echarts, fetch",
+    "description": "可视化分析、图表联动、下钻、自定义图表配置、自定义数据显示",
+    "url": ""
+  },
+  {
+    "type": "company",
+    "name": "在线考试平台",
+    "role": "核心开发",
+    "year": "2025",
+    "techStack": "vue, pinia, echarts, fetch",
+    "description": "防作弊系统、试卷分发系统",
+    "url": ""
+  },
+  {
+    "type": "company",
+    "name": "AI 招聘平台",
+    "role": "系统架构师",
+    "year": "2025",
+    "techStack": "vue, pinia, echarts, fetch",
+    "description": "防作弊系统、设备检测系统、多端防作弊、答题系统、试卷系统、考试系统、考试管理系统、考试监控系统、考试统计系统、考试分析系统、考试报告系统",
+    "url": ""
+  },
+  {
+    "type": "opensource",
+    "name": "eno-music",
+    "role": "独立开发者",
+    "year": "2024",
+    "techStack": "vue, pinia",
+    "description": "一个可以播放 Bilibili 音乐的播放器",
+    "url": "https://chromewebstore.google.com/detail/eno-m/hjcdffalgapcchmopkbnkljenlglloln?hl=zh-CN&utm_source=ext_sidebar"
+  },
+  {
+    "type": "opensource",
+    "name": "eno-m-desktop",
+    "role": "独立开发者",
+    "year": "2025",
+    "techStack": "vue, electron",
+    "description": "一个可以播放 Bilibili 音乐的播放器，桌面版",
+    "url": "https://github.com/Cteros/eno-m-desktop"
+  },
+  {
+    "type": "opensource",
+    "name": "Otter - clash TUI",
+    "role": "独立开发者",
+    "year": "2025",
+    "techStack": "bun, ts, ink, clash core",
+    "description": "Clash 的终端用户界面 (TUI)，提供了一种更友好的方式来管理和监控 Clash",
+    "url": "https://github.com/cloudflypeng/otter"
+  }
+]

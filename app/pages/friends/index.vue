@@ -1,11 +1,9 @@
 <template>
   <div class="min-h-screen pt-20">
     <!-- 头部 -->
-    <div class="max-w-4xl mx-auto px-6 mb-12">
-      <h1 class="text-4xl font-bold mb-4">朋友们</h1>
-      <p class="text-gray-500 dark:text-gray-400">一些很酷的朋友们。如果你也想交换友链，欢迎联系我。</p>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <ContentHeader title="朋友们" description="我的朋友们，以及优秀的友链展示" />
     </div>
-
     <!-- 朋友列表 -->
     <div class="max-w-4xl mx-auto px-6 pb-20">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -35,6 +33,7 @@
 </template>
 
 <script setup lang="ts">
+import ContentHeader from '~/part/ContentHeader.vue'
 
 interface Friend {
   name: string

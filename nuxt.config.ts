@@ -39,6 +39,12 @@ const siteConfig = {
       icon: 'i-simple-icons-afdian',
       bg: '#5e2299',
       hoverBg: '#5e2299'
+    },
+    rss: {
+      url: '/rss.xml',
+      icon: 'i-simple-icons-rss',
+      bg: '#f97316',
+      hoverBg: '#ea580c'
     }
   },
   navigation: {

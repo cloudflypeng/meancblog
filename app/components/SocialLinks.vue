@@ -17,8 +17,8 @@ const socialLinks = computed(() => {
   <div class="flex items-center gap-4 md:justify-start justify-center">
     <a v-for="social in socialLinks" :key="social.name" :href="social.url" :title="social.name" target="_blank"
       rel="noopener noreferrer" :style="{ '--bg': social.bg, '--hover-bg': social.hoverBg } as any"
-      class="social-btn w-12 h-12 rounded-full flex items-center justify-center text-white text-xl transition-all duration-300 transform hover:scale-110">
-      <UIcon :name="social.icon" />
+      class="social-btn w-9 h-9 rounded-full flex items-center justify-center text-white text-xl transition-all duration-300 transform hover:scale-110">
+      <UIcon :name="social.icon" class="w-4" />
     </a>
   </div>
 </template>

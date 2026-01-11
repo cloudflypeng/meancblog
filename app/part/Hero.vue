@@ -33,9 +33,12 @@ onMounted(() => {
               Specialized in Vue, React, TypeScript, and building accessible, high-performance web applications.
             </p>
 
-            <!-- 社交媒体图标 -->
-            <div class="pt-4">
+            <!-- 社交媒体图标 & GitHub 动态 -->
+            <div class="pt-4 flex flex-col lg:flex-row items-center gap-6 justify-center lg:justify-start">
               <SocialLinks />
+            </div>
+            <div class="flex justify-center lg:justify-start mt-4">
+              <GithubActivity />
             </div>
           </div>
         </Transition>

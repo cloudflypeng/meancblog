@@ -17,6 +17,7 @@
     "@nuxt/ui": "^4.3.0",
     "better-sqlite3": "^12.5.0",
     "feed": "^5.1.0",
+    "motion-v": "^1.8.0",
     "nuxt": "^4.2.2",
     "overlayscrollbars": "^2.13.0",
     "overlayscrollbars-vue": "^0.5.9",

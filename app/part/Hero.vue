@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import TxextoverDom from '~/components/TextoverDom.vue'
 const { siteConfig } = useRuntimeConfig().public
 
 const isVisible = ref(false)
@@ -45,8 +46,8 @@ onMounted(() => {
           <div v-show="isVisible" class="flex justify-center lg:justify-end lg:col-span-1 order-first lg:order-last">
             <div class="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-80 lg:h-80">
               <!-- 头像容器 -->
-              <img :src="siteConfig.site.logo" :alt="siteConfig.site.author"
-                class="relative w-full h-full squircle-mask shadow-2xl object-cover" />
+              <TxextoverDom class="mb-10" text="❤ MADE WITH LOVE ❤ MEANC And DRANKING " :img-src="siteConfig.site.logo">
+              </TxextoverDom>
             </div>
           </div>
         </Transition>
@@ -77,5 +78,11 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Styles removed as wave animation is no longer needed */
+:deep(.textover-dom) {
+  --textover-glow-color: rgba(168, 85, 247, 0.5);
+}
+
+:global(.dark) :deep(.textover-dom) {
+  --textover-glow-color: rgba(192, 132, 252, 0.6);
+}
 </style>

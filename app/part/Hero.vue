@@ -46,8 +46,9 @@ onMounted(() => {
         <!-- 右侧头像 -->
         <Transition enter-active-class="transition-all duration-1000 ease-out delay-300"
           enter-from-class="opacity-0 translate-x-12 scale-90" enter-to-class="opacity-100 translate-x-0 scale-100">
-          <div v-show="isVisible" class="flex justify-center lg:justify-end lg:col-span-1 order-first lg:order-last">
-            <div class="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-80 lg:h-80">
+          <div v-show="isVisible"
+            class="flex justify-center lg:justify-end lg:col-span-1 order-first lg:order-last mb-0 md:mb-0">
+            <div class="relative">
               <!-- 头像容器 -->
               <TxextoverDom class="mb-10" text="❤ MADE WITH LOVE ❤ MEANC And DRANKING " :img-src="siteConfig.site.logo">
               </TxextoverDom>

@@ -54,8 +54,8 @@ const blobPath = "M43.1,-68.5C56.2,-58.6,67.5,-47.3,72.3,-33.9C77.2,-20.5,75.5,-
 <style scoped>
 .textover-dom {
   position: relative;
-  width: min(260px, 70vw);
-  height: min(260px, 70vw);
+  width: min(300px, 70vw);
+  height: min(300px, 70vw);
   display: grid;
   place-items: center;
   color: var(--textover-color, rgba(17, 24, 39, 0.75));
@@ -98,11 +98,11 @@ const blobPath = "M43.1,-68.5C56.2,-58.6,67.5,-47.3,72.3,-33.9C77.2,-20.5,75.5,-
   transform-origin: center;
   transform-box: fill-box;
   transition: transform 0.4s ease-out;
-  transform: scale(0.9);
+  transform: scale(0.96);
 }
 
 .textover-dom:hover .orbit-image {
-  transform: scale(1.3);
+  transform: scale(1.2);
 }
 
 .glow-bg {

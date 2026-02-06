@@ -4,6 +4,47 @@ html {
   overflow: hidden; /* 禁用原生滚动条 */
 }
 
+/* Light theme palette: reduce glare and improve contrast */
+:root:not(.dark) {
+  --page-bg: #f6f1ea;
+  --page-bg-2: #f1ebe3;
+  --surface-1: #fbf8f3;
+  --surface-2: #f3ede6;
+  --text-1: #1f2a37;
+  --text-2: #4b5563;
+  --border-1: #e5ded5;
+}
+
+:root:not(.dark) body,
+:root:not(.dark) #scroll-wrapper {
+  background: var(--page-bg);
+  color: var(--text-1);
+}
+
+/* Override common Tailwind utility colors in light mode */
+:root:not(.dark) .bg-white {
+  background-color: var(--surface-1);
+}
+
+:root:not(.dark) .bg-gray-50 {
+  background-color: var(--surface-2);
+}
+
+:root:not(.dark) .text-gray-900 {
+  color: var(--text-1);
+}
+
+:root:not(.dark) .text-gray-700,
+:root:not(.dark) .text-gray-600,
+:root:not(.dark) .text-gray-500 {
+  color: var(--text-2);
+}
+
+:root:not(.dark) .border-gray-100,
+:root:not(.dark) .border-gray-200 {
+  border-color: var(--border-1);
+}
+
 /* 自定义 OverlayScrollbars 样式 */
 .os-theme-dark,
 .os-theme-light {

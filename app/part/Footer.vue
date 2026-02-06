@@ -18,87 +18,50 @@ const links = [
       class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-800 to-transparent opacity-50">
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
-
-        <!-- Brand Section -->
-        <div class="lg:col-span-5 space-y-6">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+        <!-- Brand + Social -->
+        <div class="flex flex-col gap-3">
           <NuxtLink to="/" class="group flex items-center gap-3 w-fit">
             <div class="relative">
               <div
                 class="absolute -inset-1 rounded-full bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm">
               </div>
               <img :src="siteConfig.site.logo" :alt="siteConfig.site.author"
-                class="relative w-10 h-10 rounded-lg shadow-sm object-cover" />
+                class="relative w-9 h-9 rounded-md shadow-sm object-cover" />
             </div>
-            <span class="font-bold text-xl tracking-tight text-gray-900 dark:text-white">{{ siteConfig.site.author
-              }}</span>
+            <span class="font-semibold text-lg tracking-tight text-gray-900 dark:text-white">
+              {{ siteConfig.site.author }}
+            </span>
           </NuxtLink>
-
-          <p class="text-gray-500 dark:text-gray-400 leading-relaxed max-w-sm">
+          <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed max-w-md">
             {{ siteConfig.site.description }}
           </p>
-
-          <div class="pt-2">
+          <div class="pt-1">
             <SocialLinks />
           </div>
         </div>
 
-        <!-- Navigation Section -->
-        <div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8 lg:pl-12">
-          <!-- Column 1 -->
-          <div class="space-y-4">
-            <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">探索</h3>
-            <ul class="space-y-3">
-              <li v-for="link in links.slice(0, 2)" :key="link.to">
-                <NuxtLink :to="link.to"
-                  class="text-sm text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors block">
-                  {{ link.label }}
-                </NuxtLink>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Column 2 -->
-          <div class="space-y-4">
-            <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">更多</h3>
-            <ul class="space-y-3">
-              <li v-for="link in links.slice(2)" :key="link.to">
-                <NuxtLink :to="link.to"
-                  class="text-sm text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors block">
-                  {{ link.label }}
-                </NuxtLink>
-              </li>
-              <!-- Example static link if wanted -->
-              <li>
-                <a href="/rss.xml" target="_blank"
-                  class="text-sm text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors block">
-                  RSS 订阅
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Column 3 (Quote or Decoration) -->
-          <div class="space-y-4 sm:block hidden">
-            <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">关于</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-              热爱技术，持续学习。<br />
-              分享编程心得与生活感悟。
-            </p>
-          </div>
-
-        </div>
+        <!-- Compact Nav -->
+        <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <NuxtLink v-for="link in links" :key="link.to" :to="link.to"
+            class="text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors">
+            {{ link.label }}
+          </NuxtLink>
+          <a href="/rss.xml" target="_blank"
+            class="text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors">
+            RSS 订阅
+          </a>
+        </nav>
       </div>
 
       <!-- Bottom Bar -->
       <div
-        class="mt-16 pt-8 border-t border-gray-100 dark:border-gray-800/50 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-sm text-gray-400 dark:text-gray-500">
+        class="mt-8 pt-4 border-t border-gray-100 dark:border-gray-800/50 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <p class="text-xs text-gray-400 dark:text-gray-500">
           &copy; {{ currentYear }} {{ siteConfig.site.author }}. All rights reserved.
         </p>
-
-        <div class="flex items-center gap-6 text-sm text-gray-400 dark:text-gray-500">
+        <div class="flex items-center gap-4 text-xs text-gray-400 dark:text-gray-500">
           <span class="hover:text-gray-600 dark:hover:text-gray-300 transition-colors cursor-default">
             Built with Nuxt 3
           </span>

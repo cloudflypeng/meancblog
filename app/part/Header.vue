@@ -111,11 +111,13 @@ const closeMenu = () => {
             <UIcon :name="link.icon" class="w-5 h-5" />
             <span>{{ link.label }}</span>
           </NuxtLink>
+          <ThemeColorPicker />
           <ThemeToggle />
         </nav>
 
         <!-- Right Side Utils (Mobile) -->
         <div class="flex items-center gap-2 lg:hidden">
+          <ThemeColorPicker />
           <ThemeToggle />
         </div>
       </div>

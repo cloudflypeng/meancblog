@@ -3,137 +3,106 @@
 
     <!-- 职业里程碑 -->
     <section class="mb-32 relative">
-      <div class="flex flex-col items-center text-center mb-30">
-        <span class="text-blue-500 dark:text-blue-400 font-mono text-sm tracking-widest uppercase mb-4">Compony
-          Project</span>
+      <div class="flex flex-col items-center text-center mb-24 fade-up">
+        <span
+          class="text-primary/80 dark:text-primary/70 font-mono text-xs tracking-[0.3em] uppercase mb-4">Company
+          Projects</span>
         <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white">企业项目</h2>
+        <p class="mt-4 text-sm md:text-base text-gray-500 dark:text-gray-400 max-w-xl leading-relaxed">
+          聚焦真实业务场景，以稳定性、可维护性与体验细节为核心的企业级项目实践。
+        </p>
       </div>
 
-      <!-- Timeline -->
-      <div class="relative">
-        <!-- Timeline line -->
-        <div
-          class="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gray-200 dark:via-gray-800 to-transparent md:-translate-x-1/2">
-          <div
-            class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-transparent via-blue-500/50 to-transparent animate-beam">
-          </div>
-        </div>
-
-        <div class="space-y-24">
-          <div v-for="(project, index) in companyProjects" :key="project.name"
-            class="group relative flex flex-col md:flex-row gap-12 items-center"
-            :class="[index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse text-right']">
-
-            <!-- Timeline dot -->
+      <div class="grid gap-6 md:grid-cols-2">
+        <div v-for="project in companyProjects" :key="project.name" class="group relative">
+          <div class="relative" @click="goTo(project.url)">
             <div
-              class="absolute left-8 md:left-1/2 w-4 h-4 rounded-full border-2 border-white dark:border-gray-950 bg-gray-200 dark:bg-gray-800 shadow-[0_0_0_4px_rgba(255,255,255,0.5)] dark:shadow-[0_0_0_4px_rgba(3,7,18,0.5)] md:-translate-x-1/2 z-10 group-hover:bg-blue-500 group-hover:scale-125 transition-all duration-500">
-              <div
-                class="absolute inset-0 rounded-full bg-blue-400/50 animate-ping opacity-0 group-hover:opacity-100 transition-opacity">
-              </div>
-            </div>
+              class="relative soft-card bg-white/80 dark:bg-gray-900/60 backdrop-blur-md border border-gray-100/80 dark:border-gray-800/80 p-7 md:p-8 rounded-3xl transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1.5 hover:border-primary/30 group-hover:bg-white dark:group-hover:bg-gray-900 group/card">
+              <div class="card-glow" aria-hidden="true"></div>
 
-            <!-- Spacer for the other side -->
-            <div class="hidden md:block flex-1"></div>
-
-            <!-- Date Label (Desktop) - Opposing side -->
-            <div class="hidden md:flex flex-1 items-center"
-              :class="[index % 2 === 0 ? 'justify-end pr-12' : 'justify-start pl-12 order-first']">
-              <span
-                class="text-6xl font-bold text-gray-100 dark:text-gray-800/50 select-none transition-colors duration-500 group-hover:text-blue-500/10">
-                {{ project.year }}
-              </span>
-            </div>
-
-            <!-- Content card container (Mobile: Full width with padding left) -->
-            <div class="w-full pl-20 md:pl-0 md:w-[calc(50%-3rem)] md:absolute md:top-1/2 md:-translate-y-1/2"
-              :class="[index % 2 === 0 ? 'md:right-0 md:text-left' : 'md:left-0 md:text-right']">
-
-              <!-- Mobile Year -->
-              <div
-                class="md:hidden absolute left-2 top-0 text-sm font-bold text-gray-400 rotate-90 origin-left translate-y-8">
-                {{ project.year }}</div>
-
-              <div class="relative perspective-1000" @click="goTo(project.url)">
-                <div
-                  class="relative bg-white/80 dark:bg-gray-900/60 backdrop-blur-md border border-gray-100 dark:border-gray-800 p-8 rounded-2xl transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 hover:border-blue-500/30 group-hover:bg-white dark:group-hover:bg-gray-900 group/card">
-
-                  <!-- Tech Stack Floating Badges -->
-                  <div class="flex flex-wrap gap-2 mb-6" :class="[index % 2 !== 0 ? 'md:justify-end' : '']">
-                    <span v-for="tech in (project.techStack?.split(',').slice(0, 3) || [])" :key="tech"
-                      class="px-2.5 py-1 text-[10px] uppercase tracking-wider font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-700 group-hover/card:border-blue-200 dark:group-hover/card:border-blue-800/50 transition-colors">
-                      {{ tech.trim() }}
-                    </span>
-                  </div>
-
-                  <h3
-                    class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 group-hover/card:text-blue-600 dark:group-hover/card:text-blue-400 transition-colors flex items-center gap-3"
-                    :class="[index % 2 !== 0 ? 'md:flex-row-reverse' : '']">
-                    {{ project.name }}
-                    <UIcon v-if="project.url" name="i-heroicons-arrow-up-right-20-solid"
-                      class="w-5 h-5 opacity-0 -translate-x-2 group-hover/card:opacity-100 group-hover/card:translate-x-0 transition-all text-blue-500" />
-                  </h3>
-
-                  <div v-if="project.role"
-                    class="text-sm font-medium text-blue-600 dark:text-blue-400 mb-4 tracking-wide uppercase opacity-80">
-                    {{ project.role }}
-                  </div>
-
-                  <p
-                    class="text-gray-600 dark:text-gray-400 leading-relaxed text-sm md:text-base group-hover/card:text-gray-900 dark:group-hover/card:text-gray-300 transition-colors">
-                    {{ project.description }}
-                  </p>
+              <div class="flex items-center justify-between mb-5">
+                <div v-if="project.year" class="text-xs font-semibold text-gray-400 dark:text-gray-500 tracking-[0.2em]">
+                  {{ project.year }}
                 </div>
+                <UIcon v-if="project.url" name="i-heroicons-arrow-up-right-20-solid"
+                  class="w-5 h-5 text-gray-300 group-hover/card:text-primary group-hover/card:-translate-y-0.5 group-hover/card:translate-x-0.5 transition-all" />
               </div>
-            </div>
 
+              <!-- Tech Stack Badges -->
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span v-for="tech in (project.techStack?.split(',').slice(0, 3) || [])" :key="tech"
+                  class="soft-chip px-2.5 py-1 text-[10px] uppercase tracking-wider font-semibold text-gray-500 dark:text-gray-400 bg-gray-100/80 dark:bg-gray-800/80 rounded-md border border-gray-200/80 dark:border-gray-700/80 group-hover/card:border-primary/20 dark:group-hover/card:border-primary/30 transition-colors">
+                  {{ tech.trim() }}
+                </span>
+              </div>
+
+              <h3
+                class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 group-hover/card:text-primary transition-colors">
+                {{ project.name }}
+              </h3>
+
+              <div v-if="project.role"
+                class="text-sm font-medium text-primary/80 dark:text-primary/70 mb-4 tracking-wide uppercase opacity-80">
+                {{ project.role }}
+              </div>
+
+              <p
+                class="text-gray-600 dark:text-gray-400 leading-relaxed text-sm md:text-base group-hover/card:text-gray-900 dark:group-hover/card:text-gray-300 transition-colors">
+                {{ project.description }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- 开源项目 (保持原有风格但微调间距) -->
-    <section class="mt-48">
-      <div class="flex flex-col items-center text-center mb-16">
-        <span class="text-blue-500 dark:text-blue-400 font-mono text-sm tracking-widest uppercase mb-4">Open
+    <section class="mt-40">
+      <div class="flex flex-col items-center text-center mb-14 fade-up">
+        <span class="text-primary/80 dark:text-primary/70 font-mono text-xs tracking-[0.3em] uppercase mb-4">Open
           Source</span>
         <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white">社区贡献与实验</h2>
+        <p class="mt-4 text-sm md:text-base text-gray-500 dark:text-gray-400 max-w-xl leading-relaxed">
+          开源、实验与探索性作品，强调可复用性与技术美感。
+        </p>
       </div>
 
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <div v-for="project in opensourceProjects" :key="project.name"
-          class="group relative rounded-2xl p-6 bg-gray-50 dark:bg-gray-800/30 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 transition-all duration-300 hover:bg-white dark:hover:bg-gray-800 cursor-pointer overflow-hidden"
+          class="group relative rounded-3xl p-6 bg-gray-50/80 dark:bg-gray-800/30 border border-transparent hover:border-gray-200/80 dark:hover:border-gray-700/80 transition-all duration-500 hover:bg-white dark:hover:bg-gray-800 cursor-pointer overflow-hidden soft-card flex flex-col h-full"
           @click="goTo(project.url)">
+          <div class="card-glow" aria-hidden="true"></div>
 
           <div class="flex justify-between items-start mb-6">
             <div
-              class="p-3 rounded-xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-100 dark:ring-gray-800 group-hover:scale-110 transition-transform duration-300">
-              <UIcon name="i-mdi-github" class="w-6 h-6 text-gray-900 dark:text-white" />
+              class="p-3 rounded-xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-100 dark:ring-gray-800 group-hover:scale-105 transition-transform duration-300 soft-float">
+              <UIcon name="i-mdi-github" class="icon-single w-6 h-6 text-gray-900 dark:text-white" />
             </div>
             <UIcon name="i-heroicons-arrow-up-right-20-solid"
-              class="w-5 h-5 text-gray-300 group-hover:text-blue-500 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" />
+              class="icon-single w-5 h-5 text-gray-300 group-hover:text-primary group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" />
           </div>
 
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-500 transition-colors">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
             {{ project.name }}
           </h3>
 
-          <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3">
+          <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3 flex-1">
             {{ project.description }}
           </p>
 
-          <div class="flex items-center justify-between border-t border-gray-100 dark:border-gray-700 pt-4 mt-auto">
+          <div class="flex items-center justify-between border-t border-gray-100 dark:border-gray-700/80 pt-4 mt-auto">
             <div v-if="project.techStack" class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-green-500"></span>
+              <span class="w-2 h-2 rounded-full bg-primary/80"></span>
               <span class="text-xs text-gray-500 font-mono">{{ project.techStack.split(',')[0] }}</span>
             </div>
 
             <div class="flex items-center gap-3 text-xs text-gray-400">
               <span v-if="project.stars !== undefined"
                 class="flex items-center gap-1 group-hover:text-yellow-500 transition-colors">
-                <UIcon name="i-heroicons-star-20-solid" class="w-3 h-3" /> {{ project.stars }}
+                <UIcon name="i-heroicons-star-20-solid" class="icon-single w-3 h-3" /> {{ project.stars }}
               </span>
               <span v-if="project.forks !== undefined" class="flex items-center gap-1">
-                <UIcon name="i-heroicons-code-bracket-20-solid" class="w-3 h-3" /> {{ project.forks }}
+                <UIcon name="i-heroicons-code-bracket-20-solid" class="icon-single w-3 h-3" /> {{ project.forks }}
               </span>
             </div>
           </div>
@@ -144,28 +113,67 @@
 </template>
 
 <style scoped>
-@keyframes beam {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
+.soft-card {
+  position: relative;
+  isolation: isolate;
+  transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+}
 
-  50% {
+.card-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(circle at top, rgba(59, 130, 246, 0.16), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.soft-card:hover .card-glow {
+  opacity: 1;
+}
+
+.soft-chip {
+  backdrop-filter: blur(6px);
+}
+
+.soft-float {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.soft-card:hover .soft-float {
+  transform: translateY(-2px);
+}
+
+.icon-single :deep(svg + svg) {
+  display: none;
+}
+
+.fade-up {
+  animation: fadeUp 0.8s ease both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
     opacity: 1;
-  }
-
-  100% {
-    transform: translateY(100vh);
-    opacity: 0;
+    transform: translateY(0);
   }
 }
 
-.animate-beam {
-  animation: beam 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-.perspective-1000 {
-  perspective: 1000px;
+@media (prefers-reduced-motion: reduce) {
+  .animate-beam,
+  .fade-up {
+    animation: none;
+  }
+  .soft-card,
+  .soft-float {
+    transition: none;
+  }
 }
 </style>
 

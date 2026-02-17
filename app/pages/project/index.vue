@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+  <div class="min-h-screen py-12 relative overflow-hidden">
 
     <!-- 职业里程碑 -->
-    <section class="mb-32 relative">
+    <section class="mb-16 relative paper-section">
       <div class="flex flex-col items-center text-center mb-24 fade-up">
         <span
           class="text-primary/80 dark:text-primary/70 font-mono text-xs tracking-[0.3em] uppercase mb-4">Company
@@ -57,7 +57,7 @@
     </section>
 
     <!-- 开源项目 (保持原有风格但微调间距) -->
-    <section class="mt-40">
+    <section class="mt-20 paper-section">
       <div class="flex flex-col items-center text-center mb-14 fade-up">
         <span class="text-primary/80 dark:text-primary/70 font-mono text-xs tracking-[0.3em] uppercase mb-4">Open
           Source</span>
@@ -174,6 +174,15 @@
   .soft-float {
     transition: none;
   }
+}
+
+.paper-section {
+  border-top: 1px solid rgba(148, 163, 184, 0.25);
+  padding-top: 1.5rem;
+}
+
+:global(.dark) .paper-section {
+  border-top-color: rgba(148, 163, 184, 0.2);
 }
 </style>
 

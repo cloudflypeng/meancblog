@@ -1,17 +1,17 @@
 <template>
   <UApp>
     <OverlayScrollbarsComponent ref="scrollRef" id="scroll-wrapper" defer class="h-screen w-full"
-      @os-initialized="onOsInitialized"
-      :options="{ scrollbars: { autoHide: 'move', clickScroll: true } }">
+      @os-initialized="onOsInitialized" :options="{ scrollbars: { autoHide: 'move', clickScroll: true } }">
       <PartBg />
       <!-- 页面加载进度条 -->
       <PageProgress />
 
-      <!-- 导航栏 -->
-      <PartHeader />
-
       <!-- 主内容区 -->
-      <NuxtPage />
+      <div class="paper-shell">
+        <div class="paper-container">
+          <NuxtPage />
+        </div>
+      </div>
       <Footer />
     </OverlayScrollbarsComponent>
   </UApp>
@@ -20,7 +20,6 @@
 import type { OverlayScrollbars } from 'overlayscrollbars'
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 import { nextTick, onMounted, ref } from 'vue'
-import PartHeader from '~/part/Header.vue'
 import PartBg from '~/part/Bg.vue'
 import Footer from '~/part/Footer.vue'
 

@@ -110,7 +110,6 @@ export default defineNuxtConfig({
     // 混合渲染配置：大幅提升访问速度
     // 首页和主要页面：预渲染 (构建时生成 HTML)
     '/': { prerender: true },
-    '/friends': { prerender: true },
     '/project': { prerender: true },
 
     // 博客文章：ISR (增量静态再生)

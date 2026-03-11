@@ -1,7 +1,7 @@
 <template>
   <section class="masthead">
     <div class="masthead-left">
-      <div id="logo" class="masthead-title">喝酒日报</div>
+      <div id="logo" class="masthead-title"></div>
       <div class="masthead-subtitle">MeanC Blog</div>
     </div>
     <div class="masthead-right">

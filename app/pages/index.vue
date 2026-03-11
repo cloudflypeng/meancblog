@@ -1,83 +1,127 @@
 <template>
-  <div class="paper-shell">
-    <Title />
-    <!-- Hero 部分 -->
-    <section class="paper-block paper-hero">
-      <Intro />
-    </section>
+  <div class="bento-shell">
+    <div class="bento-top">
+      <Title />
+    </div>
 
-    <!-- 博客预览部分 -->
-    <section class="paper-block">
-      <div class="news-head">
-        <div class="news-badge">Latest Posts</div>
-        <div class="news-meta">
-          <span>精选 · 3 篇</span>
-          <span class="divider-dot" />
-          <NuxtLink to="/blog" class="news-more">更多内容请见 Blog</NuxtLink>
+    <section class="bento-grid">
+      <!-- Hero -->
+      <div class="bento-card bento-hero">
+        <div class="card-head">
+          <div class="card-title">Introduction</div>
         </div>
-      </div>
-      <div v-if="latestArticles.length" class="news-mini-grid">
-        <article v-for="(article, index) in latestArticles" :key="article.path" class="news-mini">
-          <NuxtLink :to="article.path" class="news-mini-link">
-            <div class="news-mini-kicker">Story {{ String(index + 1).padStart(2, '0') }}</div>
-            <h3 class="news-mini-title">{{ article.title }}</h3>
-            <p class="news-mini-desc">{{ article.description }}</p>
-            <div class="news-mini-meta">
-              <span>{{ article.author }}</span>
-              <span class="news-mini-separator" />
-              <time>{{ formatDate(article.date) }}</time>
+        <div class="hero-wrap">
+          <Intro />
+          <div class="hero-foot">
+            <div class="hero-stats">
+              <div class="stat-item">
+                <div class="stat-label">Focus</div>
+                <div class="stat-value">Design systems</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">Stack</div>
+                <div class="stat-value">Nuxt · Vue · TS</div>
+              </div>
             </div>
-          </NuxtLink>
-        </article>
-      </div>
-      <div v-else class="news-mini-empty">暂无文章发布</div>
-    </section>
-
-    <!-- 画册预览部分 -->
-    <section class="paper-block">
-      <div class="news-head">
-        <div class="news-badge">Gallery</div>
-        <div class="news-meta">
-          <span>精选 · 3 张</span>
-          <span class="divider-dot" />
-          <span>随手影像</span>
+          </div>
         </div>
       </div>
-      <div class="gallery-grid">
-        <article v-for="item in galleryItems" :key="item.id" class="gallery-card" @click="openLightbox(item)">
-          <div class="gallery-frame" :style="{ aspectRatio: item.aspectRatio }">
-            <img :src="item.url" :alt="item.title" class="gallery-image" loading="lazy" />
-          </div>
-          <div class="gallery-caption">
-            <div class="gallery-title">{{ item.title }}</div>
-            <div class="gallery-desc">{{ item.description }}</div>
-          </div>
-        </article>
-      </div>
-    </section>
 
-    <!-- 朋友们 -->
-    <section class="paper-block">
-      <div class="news-head">
-        <div class="news-badge">Friends</div>
-        <div class="news-meta">
-          <span>友链 · {{ friends.length }}</span>
-          <span class="divider-dot" />
-          <span>一起写作的人</span>
+      <!-- Posts -->
+      <div class="bento-card bento-posts">
+        <div class="card-head">
+          <div class="card-title">Latest Posts</div>
+          <div class="card-actions">
+            <NuxtLink to="/blog" class="card-link">View All</NuxtLink>
+          </div>
+        </div>
+
+        <div v-if="latestArticles.length" class="posts-grid">
+          <article v-if="latestArticles[0]" class="post-feature">
+            <NuxtLink :to="latestArticles[0].path" class="post-link">
+              <h2 class="post-title">{{ latestArticles[0].title }}</h2>
+              <p class="post-desc">{{ latestArticles[0].description }}</p>
+              <div class="post-meta">
+                <span>{{ latestArticles[0].author }}</span>
+                <span class="meta-dot" />
+                <time>{{ formatDate(latestArticles[0].date) }}</time>
+              </div>
+            </NuxtLink>
+          </article>
+
+          <div class="post-list">
+            <article v-for="(article, index) in latestArticles.slice(1)" :key="article.path" class="post-mini">
+              <NuxtLink :to="article.path" class="post-link">
+                <div class="post-mini-body">
+                  <h3 class="post-mini-title">{{ article.title }}</h3>
+                  <p class="post-mini-desc">{{ article.description }}</p>
+                  <div class="post-meta">
+                    <span>{{ article.author }}</span>
+                    <span class="meta-dot" />
+                    <time>{{ formatDate(article.date) }}</time>
+                  </div>
+                </div>
+              </NuxtLink>
+            </article>
+          </div>
+        </div>
+        <div v-else class="post-empty">暂无文章发布</div>
+      </div>
+
+      <!-- Gallery -->
+      <div class="bento-card bento-gallery">
+        <div class="card-head">
+          <div class="card-title">Gallery</div>
+          <div class="card-actions">
+            <span class="card-subtitle">Three recent shots</span>
+          </div>
+        </div>
+        <div class="gallery-grid">
+          <article v-for="item in galleryItems" :key="item.id" class="gallery-card" @click="openLightbox(item)">
+            <div class="gallery-frame" :style="{ aspectRatio: item.aspectRatio }">
+              <img :src="item.url" :alt="item.title" class="gallery-image" loading="lazy" />
+            </div>
+            <div class="gallery-caption">
+              <div class="gallery-title">{{ item.title }}</div>
+              <div class="gallery-desc">{{ item.description }}</div>
+            </div>
+          </article>
         </div>
       </div>
-      <div class="friends-grid">
-        <a v-for="friend in friends" :key="friend.name" :href="friend.url" target="_blank" rel="noopener noreferrer"
-          class="friend-card">
-          <div class="friend-avatar">
-            <img :src="friend.avatar" :alt="friend.name" loading="lazy" />
+
+      <!-- Friends -->
+      <div class="bento-card bento-friends">
+        <div class="card-head">
+          <div class="card-title">Friends</div>
+          <div class="card-actions">
+            <span class="card-subtitle">{{ friends.length }} people</span>
           </div>
-          <div class="friend-info">
-            <div class="friend-name">{{ friend.name }}</div>
-            <div v-if="friend.desc" class="friend-desc">{{ friend.desc }}</div>
-            <div class="friend-host">{{ formatHost(friend.url) }}</div>
-          </div>
-        </a>
+        </div>
+        <div class="friends-grid">
+          <a v-for="friend in friends" :key="friend.name" :href="friend.url" target="_blank" rel="noopener noreferrer"
+            class="friend-card">
+            <div class="friend-avatar">
+              <img :src="friend.avatar" :alt="friend.name" loading="lazy" />
+            </div>
+            <div class="friend-info">
+              <div class="friend-name">{{ friend.name }}</div>
+              <div v-if="friend.desc" class="friend-desc">{{ friend.desc }}</div>
+              <div class="friend-host">{{ formatHost(friend.url) }}</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="bento-card bento-colophon">
+        <div class="colophon-content">
+          <span>Published by {{ siteConfig.site.author }}</span>
+          <span class="colophon-sep">·</span>
+          <span>Built with Nuxt</span>
+          <span class="colophon-sep">·</span>
+          <span>Vol. {{ currentYear }}</span>
+        </div>
+        <div class="colophon-sub">Design with clarity.</div>
       </div>
     </section>
 
@@ -107,6 +151,13 @@ interface GalleryImage {
   description: string
   aspectRatio: string
 }
+
+const { siteConfig } = useRuntimeConfig().public
+const currentYear = new Date().getFullYear()
+
+// 根据今年的天数算"期号"
+const startOfYear = new Date(currentYear, 0, 1)
+const issueNumber = Math.ceil((Date.now() - startOfYear.getTime()) / (1000 * 60 * 60 * 24))
 
 const { data: articles } = await useAsyncData('home-news', () =>
   queryCollection('blog').order('date', 'DESC').all()
@@ -194,284 +245,307 @@ useHead({
 </script>
 
 <style scoped>
-.paper-shell {
-  --ink: #1c1610;
-  --muted: #5b5147;
-  --rule: rgba(63, 50, 35, 0.22);
-  --paper-bg: #f6f0e6;
-  --paper-highlight: #fffaf3;
+/* ================================================================
+   BENTO GRID STYLE
+   ================================================================ */
+.bento-shell {
+  --ink: #111827;
+  --muted: #6b7280;
   --accent: rgb(var(--color-primary-500, 14 165 233));
+  --card: #ffffff;
+  --card-soft: #f5f7fa;
+  --border: rgba(15, 23, 42, 0.08);
   position: relative;
-  max-width: 1180px;
-  margin: 2.75rem auto 3.5rem;
-  padding: 3.6rem 2.4rem 3.4rem;
-  background: transparent;
+  max-width: 1200px;
+  margin: 2.4rem auto 3.5rem;
+  padding: 2.8rem 2rem 3.4rem;
   color: var(--ink);
-  border: none;
-  box-shadow: none;
+  font-family: "Maple", "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
   isolation: isolate;
-  overflow: hidden;
 }
 
-.paper-shell::before {
+.bento-shell::before {
   content: none;
 }
 
-.paper-shell::after {
-  content: none;
+.bento-top {
+  margin-bottom: 1.6rem;
+  padding: 1.8rem;
+  border-radius: 26px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
 }
 
-.paper-block {
-  position: relative;
-  padding: 2.8rem 2.4rem 2.3rem;
-  background: transparent;
-  border-radius: 0;
-  border: none;
-  box-shadow: none;
-  transition: transform 220ms ease;
-  overflow: hidden;
+.bento-top :deep(.masthead) {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
-.paper-block::before {
-  content: none;
+.bento-top :deep(.masthead-title) {
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
-.paper-block::after {
-  content: none;
+.bento-top :deep(.masthead-subtitle) {
+  letter-spacing: 0.14em;
 }
 
-.paper-block+.paper-block {
-  margin-top: 0.9rem;
-}
-
-.paper-block:hover {
-  transform: translateY(-3px);
-}
-
-.paper-hero {
-  padding-top: 3.4rem;
-}
-
-.news-head {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-bottom: 0.9rem;
-  margin-bottom: 1.45rem;
-  border-bottom: 2px solid rgba(63, 50, 35, 0.32);
-}
-
-.news-head::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -8px;
-  width: 96px;
-  height: 5px;
-  background: linear-gradient(90deg, rgba(63, 50, 35, 0.5), transparent);
-  opacity: 0.65;
-}
-
-.news-badge {
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-size: 0.92rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: "Georgia", "Times New Roman", serif;
-}
-
-.news-badge::before {
-  content: '';
-  width: 34px;
-  height: 2px;
-  background: rgba(63, 50, 35, 0.7);
-  display: inline-block;
-  box-shadow: 0 2px 0 rgba(63, 50, 35, 0.08);
-}
-
-.news-meta {
-  display: inline-flex;
-  gap: 0.8rem;
-  align-items: center;
-  font-size: 0.84rem;
-  color: rgba(91, 81, 71, 0.8);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-family: var(--font-mono, 'Maple Mono', monospace);
-}
-
-.divider-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: currentColor;
-  display: inline-block;
-  opacity: 0.6;
-}
-
-.news-more {
-  text-decoration: none;
-  font-weight: 700;
-  color: inherit;
-  position: relative;
-  padding-bottom: 2px;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.news-more::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), rgba(63, 50, 35, 0.6));
-  transform-origin: left;
-  transform: scaleX(0.2);
-  transition: transform 0.2s ease;
-}
-
-.news-more:hover {
-  color: var(--accent);
-}
-
-.news-more:hover::after {
-  transform: scaleX(1);
-}
-
-.news-mini-grid {
+.bento-grid {
   display: grid;
-  gap: 1.75rem;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: minmax(140px, auto);
+  gap: 1.6rem;
 }
 
-@media (min-width: 900px) {
-  .news-mini-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.news-mini {
+.bento-card {
   position: relative;
-  padding: 1.4rem 1.2rem 1.2rem;
-  background: rgba(255, 236, 200, 0.18);
-  border: 1px dashed rgba(63, 50, 35, 0.28);
-  border-radius: 10px;
-  box-shadow: none;
+  padding: 1.7rem;
+  border-radius: 26px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+  transition: transform 180ms ease, box-shadow 180ms ease;
   overflow: hidden;
-  transition: transform 200ms ease, border-color 200ms ease, background-color 200ms ease, filter 200ms ease;
 }
 
-.news-mini::before {
-  content: '';
-  position: absolute;
-  inset: 12px 12px auto 12px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(63, 50, 35, 0.3) 12%, rgba(63, 50, 35, 0.5) 50%, rgba(63, 50, 35, 0.2) 88%, transparent 100%);
-  opacity: 0.82;
-}
-
-.news-mini::after {
+.bento-card::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 10% 10%, rgba(63, 50, 35, 0.06), transparent 18%);
+  background: linear-gradient(140deg, rgba(14, 165, 233, 0.04), transparent 55%);
   opacity: 0;
+  transition: opacity 180ms ease;
   pointer-events: none;
-  transition: opacity 0.2s ease;
 }
 
-.news-mini:hover {
-  transform: translateY(-6px);
-  border-color: rgba(63, 50, 35, 0.45);
-  background: rgba(255, 236, 200, 0.24);
+.bento-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.1);
 }
 
-.news-mini:hover::after {
+.bento-card:hover::after {
   opacity: 1;
 }
 
-.news-mini-link {
-  position: relative;
+.bento-hero {
+  grid-column: span 7;
+  grid-row: span 2;
+}
+
+.bento-hero :deep(.news-hero) {
+  font-family: "Maple", "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.bento-hero :deep(.news-shell) {
+  max-width: 100%;
+}
+
+.bento-hero :deep(.news-photo) {
+  border-radius: 16px;
+}
+
+.hero-wrap {
   display: grid;
-  gap: 0.75rem;
+  gap: 1.2rem;
+}
+
+.hero-foot {
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  padding-top: 1rem;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.stat-item {
+  background: var(--card-soft);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 0.9rem 1rem;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  text-transform: none;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.stat-value {
+  font-weight: 600;
+}
+
+.bento-posts {
+  grid-column: span 5;
+  grid-row: span 2;
+}
+
+.bento-gallery {
+  grid-column: span 7;
+  grid-row: span 2;
+}
+
+.bento-friends {
+  grid-column: span 5;
+  grid-row: span 2;
+}
+
+.bento-colophon {
+  grid-column: span 12;
+  text-align: center;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.card-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.card-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.card-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.card-subtitle {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.card-chip {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.05);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.card-link {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+
+.card-link:hover {
+  color: var(--accent);
+}
+
+/* Posts */
+.posts-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.post-feature {
+  background: var(--card-soft);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  padding: 1.2rem 1.4rem 1.4rem;
+  position: relative;
+}
+
+.post-list {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.post-mini {
+  background: rgba(15, 23, 42, 0.02);
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  padding: 1rem 1.2rem;
+}
+
+.post-link {
+  display: grid;
+  gap: 0.55rem;
   text-decoration: none;
   color: inherit;
 }
 
-.news-mini-link::after {
-  content: '';
-  position: absolute;
-  inset: -12px -10px -10px -10px;
-  border: 1px dashed rgba(63, 50, 35, 0.12);
-  opacity: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+.post-title {
+  font-size: 1.4rem;
+  line-height: 1.25;
+  font-weight: 700;
 }
 
-.news-mini:hover .news-mini-link::after {
-  opacity: 1;
-  transform: translateY(-2px);
+.post-desc {
+  color: var(--muted);
+  line-height: 1.75;
 }
 
-.news-mini-kicker {
-  font-size: 0.7rem;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: rgba(91, 81, 71, 0.8);
+.post-mini-title {
+  font-size: 1.08rem;
+  font-weight: 700;
 }
 
-.news-mini-title {
-  font-size: 1.12rem;
-  font-weight: 800;
-  line-height: 1.32;
-  letter-spacing: -0.01em;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
-  transition: color 0.2s ease;
+.post-mini-body {
+  display: grid;
+  gap: 0.5rem;
 }
 
-.news-mini:hover .news-mini-title {
-  color: var(--accent);
+.post-mini-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
 }
 
-.news-mini-desc {
-  font-size: 0.95rem;
-  line-height: 1.68;
-  color: rgba(91, 81, 71, 0.82);
-}
-
-.news-mini-meta {
+.post-meta {
   display: inline-flex;
+  gap: 0.6rem;
   align-items: center;
-  gap: 0.7rem;
-  font-size: 0.74rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: rgba(91, 81, 71, 0.7);
-  font-family: var(--font-mono, 'Maple Mono', monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--muted);
 }
 
-.news-mini-separator {
-  width: 10px;
-  height: 1px;
+.meta-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
   background: currentColor;
-  display: inline-block;
+  opacity: 0.6;
 }
 
-.news-mini-empty {
-  padding: 1.5rem 0 0.5rem;
-  font-size: 0.95rem;
-  color: rgba(91, 81, 71, 0.8);
+.post-empty {
+  padding: 1.2rem 0;
+  color: var(--muted);
 }
 
+/* Gallery */
 .gallery-grid {
   display: grid;
-  gap: 1.6rem;
+  gap: 1rem;
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
@@ -482,40 +556,27 @@ useHead({
 }
 
 .gallery-card {
-  position: relative;
   display: grid;
-  gap: 0.9rem;
+  gap: 0.6rem;
   cursor: pointer;
-  padding: 0.9rem;
-  background: rgba(255, 236, 200, 0.14);
-  border: 1px dashed rgba(63, 50, 35, 0.26);
-  border-radius: 12px;
-  box-shadow: none;
-  transition: transform 240ms ease, border-color 240ms ease, background-color 240ms ease;
-}
-
-.gallery-card::after {
-  content: '';
-  position: absolute;
-  inset: 12px;
-  border: 1px dashed rgba(63, 50, 35, 0.12);
-  pointer-events: none;
-  opacity: 0.7;
+  padding: 0.6rem;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.02);
+  border: 1px solid var(--border);
+  transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
 .gallery-card:hover {
-  transform: translateY(-6px) rotate(-0.35deg);
-  border-color: rgba(63, 50, 35, 0.45);
-  background: rgba(255, 236, 200, 0.22);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
 }
 
 .gallery-frame {
   width: 100%;
   overflow: hidden;
-  background: rgba(148, 163, 184, 0.18);
-  border: 1px solid rgba(63, 50, 35, 0.14);
-  border-radius: 12px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+  background: rgba(148, 163, 184, 0.2);
+  position: relative;
 }
 
 .gallery-image {
@@ -523,40 +584,35 @@ useHead({
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: sepia(0.06) contrast(1.02);
-  transition: transform 420ms ease, filter 420ms ease;
+  transition: transform 300ms ease;
 }
 
 .gallery-card:hover .gallery-image {
   transform: scale(1.04);
-  filter: sepia(0.02) saturate(1.05);
 }
 
 .gallery-caption {
   display: grid;
-  gap: 0.35rem;
-  border-top: 1px dashed rgba(63, 50, 35, 0.18);
-  padding-top: 0.6rem;
+  gap: 0.2rem;
 }
 
 .gallery-title {
-  font-weight: 800;
-  font-size: 0.98rem;
-  letter-spacing: 0.01em;
+  font-weight: 600;
 }
 
 .gallery-desc {
-  font-size: 0.86rem;
-  color: rgba(91, 81, 71, 0.78);
+  font-size: 0.8rem;
+  color: var(--muted);
 }
 
+/* Friends */
 .friends-grid {
   display: grid;
-  gap: 1.6rem;
+  gap: 0.8rem;
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
-@media (min-width: 900px) {
+@media (min-width: 720px) {
   .friends-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -564,43 +620,30 @@ useHead({
 
 .friend-card {
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
   text-decoration: none;
   color: inherit;
-  position: relative;
-  padding: 1rem 1rem 1rem 0;
-  border: 1px dashed rgba(63, 50, 35, 0.26);
-  border-radius: 12px;
-  background: rgba(255, 236, 200, 0.14);
-  box-shadow: none;
-  transition: transform 200ms ease, border-color 200ms ease, background-color 200ms ease;
-}
-
-.friend-card::before {
-  content: '';
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  top: 14px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(63, 50, 35, 0.35) 12%, rgba(63, 50, 35, 0.55) 50%, rgba(63, 50, 35, 0.25) 88%, transparent 100%);
-  opacity: 0.7;
+  padding: 0.9rem 1rem;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.02);
+  border: 1px solid var(--border);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .friend-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(63, 50, 35, 0.45);
-  background: rgba(255, 236, 200, 0.22);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
 }
 
 .friend-avatar {
-  width: 58px;
-  height: 58px;
+  width: 42px;
+  height: 42px;
   overflow: hidden;
+  border-radius: 12px;
   background: rgba(148, 163, 184, 0.2);
-  flex: 0 0 58px;
-  border: 1px solid rgba(63, 50, 35, 0.14);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  flex: 0 0 42px;
 }
 
 .friend-avatar img {
@@ -612,150 +655,122 @@ useHead({
 
 .friend-info {
   display: grid;
-  gap: 0.3rem;
+  gap: 0.1rem;
+  min-width: 0;
+  flex: 1;
 }
 
 .friend-name {
-  font-weight: 800;
-  font-size: 1.02rem;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .friend-desc {
-  font-size: 0.87rem;
-  color: rgba(91, 81, 71, 0.78);
+  font-size: 0.8rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .friend-host {
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(91, 81, 71, 0.7);
-  font-family: var(--font-mono, 'Maple Mono', monospace);
+  color: var(--muted);
+  font-family: var(--font-mono, "Maple Mono", monospace);
+  opacity: 0.7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-@media (max-width: 860px) {
-  .paper-shell {
-    padding: 2.6rem 1.2rem 3rem;
-    border-left: none;
-    border-right: none;
+.colophon-content {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--muted);
+}
+
+.colophon-sep {
+  opacity: 0.5;
+}
+
+.colophon-sub {
+  margin-top: 0.6rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .bento-hero,
+  .bento-posts,
+  .bento-gallery,
+  .bento-friends {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 720px) {
+  .bento-shell {
+    padding: 2rem 1.2rem 3rem;
   }
 
-  .paper-block {
-    padding: 2.3rem 1.6rem 2.1rem;
+  .bento-card {
+    padding: 1.3rem;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .paper-block,
-  .news-mini,
+  .bento-card,
   .gallery-card,
   .friend-card,
-  .news-more,
   .gallery-image {
     transition: none !important;
     animation: none !important;
   }
 }
 
-:global(.dark) .paper-shell {
-  --ink: #e5ecf5;
-  --muted: #c5d0df;
-  --rule: rgba(226, 232, 240, 0.22);
-  --paper-bg: #0f172a;
-  --paper-highlight: rgba(17, 24, 39, 0.82);
-  background: transparent;
-  border-color: transparent;
-  box-shadow: none;
+/* Dark mode */
+:global(.dark) .bento-shell {
+  --ink: #e2e8f0;
+  --muted: #94a3b8;
+  --card: rgba(15, 23, 42, 0.85);
+  --card-soft: rgba(30, 41, 59, 0.85);
+  --border: rgba(148, 163, 184, 0.22);
 }
 
-:global(.dark) .paper-shell::after {
-  content: none;
+:global(.dark) .bento-card {
+  box-shadow: 0 20px 50px rgba(2, 6, 23, 0.45);
 }
 
-:global(.dark) .paper-block {
-  background: transparent;
-  border: none;
-  box-shadow: none;
+:global(.dark) .card-chip {
+  background: rgba(148, 163, 184, 0.15);
 }
 
-:global(.dark) .paper-block::after {
-  content: none;
+:global(.dark) .gallery-card,
+:global(.dark) .friend-card,
+:global(.dark) .post-mini {
+  background: rgba(148, 163, 184, 0.08);
 }
 
-:global(.dark) .news-head {
-  border-bottom-color: rgba(226, 232, 240, 0.3);
-}
-
-:global(.dark) .news-head::after {
-  background: linear-gradient(90deg, rgba(226, 232, 240, 0.5), transparent);
-}
-
-:global(.dark) .news-badge::before {
-  background: rgba(226, 232, 240, 0.7);
-}
-
-:global(.dark) .news-meta {
-  color: rgba(226, 232, 240, 0.78);
-}
-
-:global(.dark) .news-mini {
-  background: rgba(17, 24, 39, 0.5);
-  border-color: rgba(226, 232, 240, 0.22);
-  box-shadow: none;
-}
-
-:global(.dark) .news-mini::before {
-  background: linear-gradient(90deg, transparent 0%, rgba(226, 232, 240, 0.28) 18%, rgba(226, 232, 240, 0.5) 50%, rgba(226, 232, 240, 0.28) 82%, transparent 100%);
-}
-
-:global(.dark) .news-mini-kicker,
-:global(.dark) .news-mini-meta {
-  color: rgba(226, 232, 240, 0.72);
-}
-
-:global(.dark) .news-mini-desc {
-  color: rgba(226, 232, 240, 0.84);
-}
-
-:global(.dark) .news-mini-empty {
-  color: rgba(226, 232, 240, 0.7);
-}
-
-:global(.dark) .gallery-card {
-  background: rgba(17, 24, 39, 0.55);
-  border-color: rgba(226, 232, 240, 0.22);
-  box-shadow: none;
-}
-
-:global(.dark) .gallery-card::after {
-  border-color: rgba(226, 232, 240, 0.12);
-}
-
-:global(.dark) .gallery-frame {
-  background: rgba(148, 163, 184, 0.2);
-  border-color: rgba(226, 232, 240, 0.16);
-}
-
-:global(.dark) .gallery-desc {
-  color: rgba(226, 232, 240, 0.78);
-}
-
-:global(.dark) .friend-card {
-  background: rgba(17, 24, 39, 0.55);
-  border-color: rgba(226, 232, 240, 0.22);
-  box-shadow: none;
-}
-
-:global(.dark) .friend-card::before {
-  background: linear-gradient(90deg, transparent 0%, rgba(226, 232, 240, 0.25) 12%, rgba(226, 232, 240, 0.5) 50%, rgba(226, 232, 240, 0.25) 88%, transparent 100%);
-}
-
-:global(.dark) .friend-desc {
-  color: rgba(226, 232, 240, 0.82);
-}
-
-:global(.dark) .friend-host {
-  color: rgba(226, 232, 240, 0.7);
+:global(.dark) .post-desc,
+:global(.dark) .post-mini-desc,
+:global(.dark) .gallery-desc,
+:global(.dark) .friend-desc,
+:global(.dark) .colophon-content {
+  color: var(--muted);
 }
 </style>

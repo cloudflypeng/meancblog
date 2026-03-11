@@ -17,7 +17,7 @@ html {
 
 :root:not(.dark) body,
 :root:not(.dark) #scroll-wrapper {
-  background: var(--page-bg);
+  background: transparent;
   color: var(--text-1);
 }
 

@@ -111,6 +111,7 @@ export default defineNuxtConfig({
     // 首页和主要页面：预渲染 (构建时生成 HTML)
     '/': { prerender: true },
     '/project': { prerender: true },
+    '/resume': { prerender: true },
 
     // 博客文章：ISR (增量静态再生)
     // 允许在不重新部署的情况下，并在后台更新页面缓存 (例如每小时更新一次)
@@ -124,7 +125,7 @@ export default defineNuxtConfig({
     preset: 'vercel',
     prerender: {
       crawlLinks: false,
-      routes: ['/']
+      routes: ['/', '/resume']
     }
   }
 })

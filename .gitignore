@@ -23,3 +23,7 @@ logs
 .env.*
 !.env.example
 .alma-snapshots
+
+# Local resume and images
+app/pages/resume.vue
+app/assets/img/pic.jpg
